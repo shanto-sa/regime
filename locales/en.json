@@ -1,0 +1,4 @@
+{
+    "welcome": "Welcome",
+    "subscription": "You are now subscribed to the comprehensive package since {{startDate}} and it will end in {{daysRemaining}} days on {{endDate}}"
+}

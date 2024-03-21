@@ -1,0 +1,4 @@
+{
+    "welcome": "مرحبا",
+    "subscription": "أنت مشترك الآن في الباقة الشاملة منذ {{startDate}} وستنتهي خلال {{daysRemaining}} أيام في {{endDate}}"
+  }
