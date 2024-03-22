@@ -16,8 +16,6 @@ const handleDateChange = (date) => {
     console.error('mainState.activeDate is not a string:', date);
   }
 };
-
-
   return (
     <View style={styles.container}>
 
@@ -37,10 +35,6 @@ const handleDateChange = (date) => {
         minuteInterval={30}
         style={{ borderRadius: 10,  }}
       />
-
-
-
-
     </View>
   );
 };

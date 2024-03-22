@@ -66,7 +66,7 @@ const HomeScreen = () => {
       </View>
       <View style={styles.dottedLine} />
 
-      <View style={styles.rightContent}>
+  <View style={styles.rightContent}>
   <View style={styles.contentWrapper}>
     <Text style={styles.todayText}>وجبات اليوم</Text>
     <Image
@@ -76,55 +76,26 @@ const HomeScreen = () => {
   </View>
 </View>
 
-<ScrollView contentContainerStyle={styles.scrollViewContainer}>
-<View style={styles.card2}>
-  <View style={styles.leftContent}>
-    <Text style={styles.additionalText}>سلطة كول سلو</Text>
-    <Text style={styles.additionalSubText}>Slow Cole Slow SlowSlow Cole ...</Text>
-    <TouchableOpacity style={styles.button} onPress={() => console.log('Button Pressed')}>
-      <Text style={styles.buttonText}>10 سعرات</Text>
-    </TouchableOpacity>
-  </View>
-  <Image
-    source={require('../../Image/card1.png')}
-    style={styles.cardImage}
-    resizeMode="cover" // Change resizeMode to cover
-  />
-</View>
 
-
-<View style={styles.card2}>
-  <View style={styles.leftContent}>
-    <Text style={styles.additionalText}>سلطة أفوكادو</Text>
-    <Text style={styles.additionalSubText}>Slow Cole Slow SlowSlow Cole ...</Text>
-    <TouchableOpacity style={styles.button} onPress={() => console.log('Button Pressed')}>
-      <Text style={styles.buttonText}>15 سعرات</Text>
-    </TouchableOpacity>
-  </View>
-  <Image
-    source={require('../../Image/card2.png')}
-    style={styles.cardImage}
-    resizeMode="cover" // Change resizeMode to cover
-  />
-</View>
-
-
-<View style={styles.card2}>
-  <View style={styles.leftContent}>
-    <Text style={styles.additionalText}>ساندويتش تونا</Text>
-    <Text style={styles.additionalSubText}>Slow Cole Slow SlowSlow Cole ...</Text>
-    <TouchableOpacity style={styles.button} onPress={() => console.log('Button Pressed')}>
-      <Text style={styles.buttonText}>20 سعرات</Text>
-    </TouchableOpacity>
-  </View>
-  <Image
-    source={require('../../Image/card2.png')}
-    style={styles.cardImage}
-    resizeMode="cover" // Change resizeMode to cover
-  />
-</View>
-
-</ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+            {/* Additional Card */}
+            <View style={styles.card2}>
+              <View style={styles.centerContent}>
+                <Image
+                  source={require('../../Image/nomeal.png')}
+                  style={styles.card2Image}
+                  resizeMode="cover"
+                />
+              </View>
+              <View style={styles.centerContent}>
+                <Text style={styles.noMealText}>لا يوجد وجبات حاليًا</Text>
+                <Text style={styles.noMealInfoText}>يبدو أنك لم تقم بإضافة أي وجبات حاليًا , بمجرد ان تقوم بإضافة الوجبات ستظهر هنا</Text>
+                <TouchableOpacity style={styles.addButton} onPress={() => console.log('Add Meal Pressed')}>
+                  <Text style={styles.addButtonText}>إضافة الوجبات</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </ScrollView>
     </SafeAreaView>
   );
 };
@@ -137,8 +108,8 @@ const styles = StyleSheet.create({
    card: {
       backgroundColor: '#EFF9F0',
       borderRadius: 10,
-      padding: 30,
-      margin: screenWidth * 0.04,
+      padding: 35,
+      margin: screenWidth * 0.02,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -148,7 +119,7 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius: 6,
       padding: screenWidth * 0.02,
-      margin: screenWidth * 0.02,
+      margin: screenWidth * 0.05,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -210,10 +181,7 @@ const styles = StyleSheet.create({
     fontSize: screenWidth * 0.04,
     color:'#000000'
   },
-  cardImage: {
-    width: '30%',
-    height: '100%',
-  },
+
   button: {
     backgroundColor: '#F67600',
     borderRadius: 5,
@@ -249,11 +217,55 @@ const styles = StyleSheet.create({
     color: '#000000',
     marginRight: 10, // Adjust spacing as needed
   },
-  scrollViewContainer: {
-    paddingBottom: screenHeight * 0.1, // Adjust as needed
-  },
+
+    scrollViewContent: {
+      flexGrow: 1,
+      paddingBottom: screenHeight * 0.1, // Adjust as needed
+    },
   
-  
+    card2: {
+      borderColor: '#F2F2F2',
+      borderWidth: 1,
+      borderRadius: 6,
+      padding: screenWidth * 0.02,
+      margin: screenWidth * 0.05,
+      alignItems: 'center', // Center items horizontally
+    },
+    centerContent: {
+      alignItems: 'center',
+      marginBottom: screenHeight * 0.02, // Add margin between image and text
+    },
+    noMealText: {
+      fontSize: screenWidth * 0.05,
+      fontWeight: 'bold',
+      marginBottom: screenHeight * 0.01,
+      color: '#000000'
+    },
+    noMealInfoText: {
+      fontSize: screenWidth * 0.04,
+      marginBottom: screenHeight * 0.01,
+      color: '#000000',
+      textAlign: 'center', // Center text horizontally
+    },
+    addButton: {
+      backgroundColor: '#2CA545',
+      borderRadius: 5,
+      paddingVertical: screenHeight * 0.016,
+      paddingHorizontal: screenWidth * 0.04,
+      marginTop: screenHeight * 0.01,
+    },
+    addButtonText: {
+      color: '#FFF',
+      fontWeight: 'bold',
+      fontSize: screenWidth * 0.04,
+    },
+    card2Image: {
+      width: screenWidth * 0.3,
+      height: screenHeight * 0.1,
+      marginBottom: screenHeight * 0.010,
+    },
+
+
 });
 
 export default HomeScreen;

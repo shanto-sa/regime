@@ -31,7 +31,7 @@ const LoginScreen = ({ navigation }) => {
       // Set user authentication status in global state
       // For example, using Redux or Context API
       // Then navigate to the HomeScreen
-      navigation.navigate('Dob');
+      navigation.navigate('MainApp');
     } else {
       setErrortext('Invalid phone number');
       setLoading(false);

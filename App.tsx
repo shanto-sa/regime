@@ -15,7 +15,6 @@ import GenderScreen from './Screen/GenderScreen';
 import HWScreen from './Screen/HWScreen';
 import DobScreen from './Screen/DobScreen';
 
-
 import RegisterScreen from './Screen/RegisterScreen';
 import HomeScreen from './Screen/MainScreens/HomeScreen';
 import CartScreen from './Screen/MainScreens/CartScreen';
