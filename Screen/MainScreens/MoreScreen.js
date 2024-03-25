@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
 
 const ProfileCard = ({ name, phoneNumber }) => {
   return (
@@ -36,8 +37,29 @@ const OptionCard = ({ title, onPress, icon }) => {
 
 
 const MoreScreen = () => {
+  const navigation = useNavigation();
   const handleOptionPress = (option) => {
-    console.log(option);
+    switch (option) {
+      case 'PrivacyPolicy':
+        navigation.navigate('PrivacyPolicy'); // Navigate to PrivacyPolicyScreen
+        break;
+      case 'TermsAndCondition':
+        navigation.navigate('TermsAndCondition'); // Navigate to TermsAndConditionScreen
+        break;
+      case 'WhoWeAre':
+        navigation.navigate('WhoWeAre'); // Navigate to WhoWeAreScreen
+        break;
+      case 'TechnicalSupport':
+        navigation.navigate('TechnicalSupport'); // Navigate to WhoWeAreScreen
+        break;
+      case 'ContactUs':
+        navigation.navigate('ContactUs'); // Navigate to ContactUsScreen
+        break;
+      default:
+        break;
+    }
+
+
   };
 
   return (
@@ -54,11 +76,11 @@ const MoreScreen = () => {
           </View>
           <Text style={{ fontSize: 18, marginBottom: 16, marginTop: 16, color:'#000000',  fontWeight: 'bold', }}>الخصوصية</Text>
           <View style={{ backgroundColor:'#ffffff', padding:10, borderRadius: 30, marginBottom:60 }}>
-          <OptionCard title="سياسة الخصوصية" onPress={() => handleOptionPress('سياسة الخصوصية')} icon={require('../../Image/more/3.png')} />
-          <OptionCard title="الشروط والأحكام" onPress={() => handleOptionPress('الشروط والأحكام')} icon={require('../../Image/more/4.png')} />
-          <OptionCard title="عن التطبيق" onPress={() => handleOptionPress('عن التطبيق')} icon={require('../../Image/more/5.png')} />
-          <OptionCard title="من نحن" onPress={() => handleOptionPress('من نحن')} icon={require('../../Image/more/6.png')} />
-          <OptionCard title="تواصل معنا" onPress={() => handleOptionPress('تواصل معنا')} icon={require('../../Image/more/7.png')} />
+          <OptionCard title="سياسة الخصوصية" onPress={() => handleOptionPress('PrivacyPolicy')} icon={require('../../Image/more/3.png')} />
+          <OptionCard title="الشروط والأحكام" onPress={() => handleOptionPress('TermsAndCondition')} icon={require('../../Image/more/4.png')} />
+          <OptionCard title="عن التطبيق" onPress={() => handleOptionPress('WhoWeAre')} icon={require('../../Image/more/5.png')} />
+          <OptionCard title="الدعم الفني" onPress={() => handleOptionPress('TechnicalSupport')} icon={require('../../Image/more/6.png')} />
+          <OptionCard title="تواصل معنا" onPress={() => handleOptionPress('ContactUs')} icon={require('../../Image/more/7.png')} />
           </View>
           <View style={{ marginBottom: 16, paddingBottom: 10 }}>
             <TouchableOpacity style={{ padding: 16, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' }}>

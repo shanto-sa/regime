@@ -1,41 +1,77 @@
 import * as React from 'react';
-import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
 
 const TechnicalSupportScreen = () => {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1, padding: 16}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+      <ScrollView>
         <View style={styles.container}>
           <Text style={styles.header}>
-          Technical Support Screen
+            الدعم الفني
           </Text>
+          <View style={styles.card}>
+            <Text style={styles.cardText}>فريق الدعم الفني</Text>
+            <Text style={styles.cardText2}>اسألنا ما تريد، أو أرسل الفيدباك</Text>
+            <Image source={require('../../Image/regimelogo.png')} style={styles.image} />
+            <Text style={styles.responseText}>عادة ما يتم الرد خلال ساعة</Text>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
-
-export default TechnicalSupportScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 16,
   },
   header: {
     fontSize: 25,
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: 40,
+    fontWeight: 'bold',
+    color: '#000000',
   },
-  footerHeading: {
-    fontSize: 18,
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 40,
+    alignItems: 'center',
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  cardText: {
+    fontSize: 20,
     textAlign: 'center',
-    color: 'grey',
+    fontWeight:'bold',
+    marginBottom: 10,
+    color: '#000000',
   },
-  footerText: {
+
+    cardText2: {
+      fontSize: 18,
+      textAlign: 'center',
+      marginBottom: 30,
+      color: '#000000',
+    },
+  image: {
+    width: 130,
+    height: 110,
+    marginBottom: 30,
+  },
+  responseText: {
     fontSize: 16,
-    textAlign: 'center',
-    color: 'grey',
+    color: 'green',
   },
 });
+
+export default TechnicalSupportScreen;

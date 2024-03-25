@@ -15,6 +15,14 @@ import GenderScreen from './Screen/GenderScreen';
 import HWScreen from './Screen/HWScreen';
 import DobScreen from './Screen/DobScreen';
 
+
+// Imported Static Screens
+import PrivacyPolicyScreen from './Screen/Statics/PrivacyPolicyScreen';
+import TermsAndConditionScreen from './Screen/Statics/TermsAndConditionScreen';
+import WhoWeAreScreen from './Screen/Statics/WhoWeAreScreen';
+import TechnicalSupportScreen from './Screen/Statics/TechnicalSupportScreen';
+import ContactUsScreen from './Screen/Statics/ContactUsScreen';
+
 import RegisterScreen from './Screen/RegisterScreen';
 import HomeScreen from './Screen/MainScreens/HomeScreen';
 import CartScreen from './Screen/MainScreens/CartScreen';
@@ -67,6 +75,46 @@ const TabIcon = ({ icon, color, size, focused }) => (
   </View>
 );
 
+function MoreStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="More"
+      screenOptions={{headerShown: false}}>
+      <Stack.Screen
+        name="More"
+        component={MoreScreen}
+        options={{title: 'More Option'}}
+      />
+      <Stack.Screen
+        name="TermsAndCondition"
+        component={TermsAndConditionScreen}
+        options={{headerShown: true , title: ''}}
+      />
+      <Stack.Screen
+        name="PrivacyPolicy"
+        component={PrivacyPolicyScreen}
+        options={{headerShown: true , title: ''}}
+      />
+      <Stack.Screen
+        name="WhoWeAre"
+        component={WhoWeAreScreen}
+        options={{headerShown: true , title: ''}}
+      />
+      <Stack.Screen
+        name="TechnicalSupport"
+        component={TechnicalSupportScreen}
+        options={{headerShown: true , title: ''}}
+      />
+      <Stack.Screen
+        name="ContactUs"
+        component={ContactUsScreen}
+        options={{headerShown: true , title: ''}}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
 // Bottom Tab Navigator for Home and Settings screens
 const BottomTabNavigator = () => {
   return (
@@ -116,21 +164,22 @@ const BottomTabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="More"
-        component={MoreScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size, focused }) => (
-            <TabIcon
-              icon={require('./Image/icon/more.png')}
-              color={color}
-              size={size}
-              focused={focused}
-            />
-          ),
-        }}
-      />
+
+<Tab.Screen
+          name="MoreStack"
+          component={MoreStack}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color, size, focused }) => (
+              <TabIcon
+                icon={require('./Image/icon/more.png')}
+                color={color}
+                size={size}
+                focused={focused}
+              />
+            ),
+          }}
+        />
     </Tab.Navigator>
   );
 };
@@ -178,7 +227,6 @@ const AuthStackScreen = () => {
               component={DobScreen}
                 options={{ headerShown: false }}
             />
-       
 
       <AuthStack.Screen
         name="RegisterScreen"
@@ -243,9 +291,6 @@ const App = () => {
                 />
               </View>
             ),
-            
-            
-            
           }}
         />
       </Stack.Navigator>
