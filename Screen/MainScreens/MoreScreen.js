@@ -3,12 +3,27 @@ import { View, Text, SafeAreaView, TouchableOpacity, Image, ScrollView } from 'r
 import { useNavigation } from '@react-navigation/native'; 
 
 const ProfileCard = ({ name, phoneNumber }) => {
+
+  const navigation = useNavigation();
+  const handleProfilePress = () => {
+    navigation.navigate('EditInfo'); // Navigate to EditProfileScreen
+  };
+
+  const handleEditPress = () => {
+    navigation.navigate('EditInfo'); // Navigate to EditProfileScreen
+  };
+
   return (
     <View style={{ marginBottom: 16, backgroundColor: '#FFFFFF', borderRadius: 30, padding: 16, alignItems: 'center', width: '100%' }}>
+    <TouchableOpacity  onPress={handleEditPress} >
       <Image source={require('../../Image/profile.png')} style={{ width: 80, height: 80, borderRadius: 40, marginBottom: 8 }} />
-      <Text style={{ fontSize: 18,  color:'#000000' , marginBottom: 4 }}>{name}</Text>
-      <Text style={{ fontSize: 16,  color:'#000000'  }}>{phoneNumber}</Text>
-    </View>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={handleProfilePress}  style={{ position: 'absolute', top: 10, right: 135 }}>
+      <Image source={require('../../Image/pencil.png')} style={{ width: 20, height: 20 }} />
+    </TouchableOpacity>
+    <Text style={{ fontSize: 18,  color:'#000000' , marginBottom: 4 }}>{name}</Text>
+    <Text style={{ fontSize: 16,  color:'#000000'  }}>{phoneNumber}</Text>
+  </View>
   );
 };
 
@@ -55,6 +70,12 @@ const MoreScreen = () => {
       case 'ContactUs':
         navigation.navigate('ContactUs'); // Navigate to ContactUsScreen
         break;
+        case 'Vacation':
+        navigation.navigate('Vacation'); // Navigate to VacationScreen
+        break;
+        case 'ListAddress':
+        navigation.navigate('ListAddress'); // Navigate to VacationScreen
+        break;
       default:
         break;
     }
@@ -71,8 +92,8 @@ const MoreScreen = () => {
           <ProfileCard name="ماريا العقبي" phoneNumber="0597128218" />
           <Text style={{ fontSize: 18, marginBottom: 16, color:'#000000',  fontWeight: 'bold', }}>البروفايل</Text>
           <View style={{ backgroundColor:'#ffffff', padding:10, borderRadius: 30, }}>
-          <OptionCard title="إضافة العناوين" onPress={() => handleOptionPress('إضافة العناوين')} icon={require('../../Image/more/1.png')} />
-          <OptionCard title="إضافة إجازة" onPress={() => handleOptionPress('إضافة إجازة')} icon={require('../../Image/more/2.png')} />
+          <OptionCard title="إضافة العناوين" onPress={() => handleOptionPress('ListAddress')} icon={require('../../Image/more/1.png')} />
+          <OptionCard title="إضافة إجازة" onPress={() => handleOptionPress('Vacation')} icon={require('../../Image/more/2.png')} />
           </View>
           <Text style={{ fontSize: 18, marginBottom: 16, marginTop: 16, color:'#000000',  fontWeight: 'bold', }}>الخصوصية</Text>
           <View style={{ backgroundColor:'#ffffff', padding:10, borderRadius: 30, marginBottom:60 }}>

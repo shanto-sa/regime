@@ -22,6 +22,10 @@ import TermsAndConditionScreen from './Screen/Statics/TermsAndConditionScreen';
 import WhoWeAreScreen from './Screen/Statics/WhoWeAreScreen';
 import TechnicalSupportScreen from './Screen/Statics/TechnicalSupportScreen';
 import ContactUsScreen from './Screen/Statics/ContactUsScreen';
+import VacationScreen from './Screen/Statics/VacationScreen';
+import EditInfoScreen from './Screen/EditInfoScreen';
+
+import ListAddress from './Screen/Components/ListAddress';
 
 import RegisterScreen from './Screen/RegisterScreen';
 import HomeScreen from './Screen/MainScreens/HomeScreen';
@@ -108,6 +112,23 @@ function MoreStack() {
       <Stack.Screen
         name="ContactUs"
         component={ContactUsScreen}
+        options={{headerShown: true , title: ''}}
+      />
+
+      <Stack.Screen
+        name="Vacation"
+        component={VacationScreen}
+        options={{headerShown: true , title: ''}}
+      />
+
+      <Stack.Screen
+        name="ListAddress"
+        component={ListAddress}
+        options={{headerShown: true , title: ''}}
+      />
+      <Stack.Screen
+        name="EditInfo"
+        component={EditInfoScreen}
         options={{headerShown: true , title: ''}}
       />
 
