@@ -16,6 +16,13 @@ import HWScreen from './Screen/HWScreen';
 import DobScreen from './Screen/DobScreen';
 
 
+//Imported Home Tab Sub-Screens
+import ChoosePlanScreen from './Screen/Subscription/ChoosePlanScreen';
+import PlanDetailsScreen from './Screen/Subscription/PlanDetailsScreen';
+import PlanDaysScreen from './Screen/Subscription/PlanDaysScreen';
+import PayNowScreen from './Screen/Subscription/PayNowScreen';
+
+
 // Imported Static Screens
 import PrivacyPolicyScreen from './Screen/Statics/PrivacyPolicyScreen';
 import TermsAndConditionScreen from './Screen/Statics/TermsAndConditionScreen';
@@ -28,7 +35,7 @@ import EditInfoScreen from './Screen/EditInfoScreen';
 import ListAddress from './Screen/Components/ListAddress';
 
 import RegisterScreen from './Screen/RegisterScreen';
-import HomeScreen from './Screen/MainScreens/HomeScreen';
+import HomeScreen from './Screen/MainScreens/HomeScreen3';
 import CartScreen from './Screen/MainScreens/CartScreen';
 import MoreScreen from './Screen/MainScreens/MoreScreen';
 
@@ -136,6 +143,78 @@ function MoreStack() {
   );
 }
 
+
+function HomeStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{headerShown: false}}>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{title: 'Home Tab'}}
+      />
+
+      <Stack.Screen 
+      name="ChoosePlan"
+      component={ChoosePlanScreen}
+      options={{
+        headerShown: true,
+        headerTitleAlign: 'center', // Align title in the center
+        headerTitleStyle: {
+          fontSize: 20, // Adjust text size as needed
+          fontWeight: 'bold', // Make text bold
+        },
+        title: 'ختيار الباقة', // Title without leading spaces
+      }}
+      />
+
+      <Stack.Screen 
+      name="PlanDetails"
+      component={PlanDetailsScreen}
+      options={{
+        headerShown: true,
+        headerTitleAlign: 'center', // Align title in the center
+        headerTitleStyle: {
+          fontSize: 20, // Adjust text size as needed
+          fontWeight: 'bold', // Make text bold
+        },
+        title: 'الكيتو', // Title without leading spaces
+      }}
+      />
+
+      <Stack.Screen 
+      name="PlanDays"
+      component={PlanDaysScreen}
+      options={{
+        headerShown: true,
+        headerTitleAlign: 'center', // Align title in the center
+        headerTitleStyle: {
+          fontSize: 20, // Adjust text size as needed
+          fontWeight: 'bold', // Make text bold
+        },
+        title: 'اختيار الايام', // Title without leading spaces
+      }}
+      />
+
+      <Stack.Screen 
+      name="PayNow"
+      component={PayNowScreen}
+      options={{
+        headerShown: true,
+        headerTitleAlign: 'center', // Align title in the center
+        headerTitleStyle: {
+          fontSize: 20, // Adjust text size as needed
+          fontWeight: 'bold', // Make text bold
+        },
+        title: 'إتمام الطلب', // Title without leading spaces
+      }}
+      />
+
+    </Stack.Navigator>
+  );
+}
+
 // Bottom Tab Navigator for Home and Settings screens
 const BottomTabNavigator = () => {
   return (
@@ -156,8 +235,8 @@ const BottomTabNavigator = () => {
         },
       }}>
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="HomeStack"
+        component={HomeStack}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
