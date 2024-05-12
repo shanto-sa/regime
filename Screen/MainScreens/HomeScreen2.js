@@ -4,7 +4,17 @@ import { View, Text, Button, SafeAreaView, StyleSheet, Image, Dimensions, Toucha
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
+import { useNavigation } from '@react-navigation/native';
+
 const HomeScreen = () => {
+
+  const navigation = useNavigation();
+
+  const handleAddMealPress = () => {
+    navigation.navigate('AddMeal');
+  };
+
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Main Card */}
@@ -90,7 +100,7 @@ const HomeScreen = () => {
               <View style={styles.centerContent}>
                 <Text style={styles.noMealText}>لا يوجد وجبات حاليًا</Text>
                 <Text style={styles.noMealInfoText}>يبدو أنك لم تقم بإضافة أي وجبات حاليًا , بمجرد ان تقوم بإضافة الوجبات ستظهر هنا</Text>
-                <TouchableOpacity style={styles.addButton} onPress={() => console.log('Add Meal Pressed')}>
+                <TouchableOpacity style={styles.addButton} onPress={handleAddMealPress}>
                   <Text style={styles.addButtonText}>إضافة الوجبات</Text>
                 </TouchableOpacity>
               </View>

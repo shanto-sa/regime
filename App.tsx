@@ -22,6 +22,8 @@ import PlanDetailsScreen from './Screen/Subscription/PlanDetailsScreen';
 import PlanDaysScreen from './Screen/Subscription/PlanDaysScreen';
 import PayNowScreen from './Screen/Subscription/PayNowScreen';
 
+import AddMealScreen from './Screen/AddMealScreen';
+
 
 // Imported Static Screens
 import PrivacyPolicyScreen from './Screen/Statics/PrivacyPolicyScreen';
@@ -35,7 +37,7 @@ import EditInfoScreen from './Screen/EditInfoScreen';
 import ListAddress from './Screen/Components/ListAddress';
 
 import RegisterScreen from './Screen/RegisterScreen';
-import HomeScreen from './Screen/MainScreens/HomeScreen3';
+import HomeScreen from './Screen/MainScreens/HomeScreen2';
 import CartScreen from './Screen/MainScreens/CartScreen';
 import MoreScreen from './Screen/MainScreens/MoreScreen';
 
@@ -194,6 +196,20 @@ function HomeStack() {
           fontWeight: 'bold', // Make text bold
         },
         title: 'اختيار الايام', // Title without leading spaces
+      }}
+      />
+
+      <Stack.Screen 
+      name="AddMeal"
+      component={AddMealScreen}
+      options={{
+        headerShown: true,
+        headerTitleAlign: 'center', // Align title in the center
+        headerTitleStyle: {
+          fontSize: 20, // Adjust text size as needed
+          fontWeight: 'bold', // Make text bold
+        },
+        title: 'إختيار الوجبات', // Title without leading spaces
       }}
       />
 
