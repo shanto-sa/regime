@@ -3,7 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image, View, Text } from 'react-native';
+import { Image, View, Text, LogBox } from 'react-native';
 
 // Import Screens
 import SplashScreen from './Screen/SplashScreen';
@@ -37,12 +37,14 @@ import EditInfoScreen from './Screen/EditInfoScreen';
 import ListAddress from './Screen/Components/ListAddress';
 
 import RegisterScreen from './Screen/RegisterScreen';
-import HomeScreen from './Screen/MainScreens/HomeScreen2';
+import HomeScreen from './Screen/MainScreens/HomeScreen3';
 import CartScreen from './Screen/MainScreens/CartScreen';
 import MoreScreen from './Screen/MainScreens/MoreScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+LogBox.ignoreAllLogs();
 
 // Custom Tab Icon component
 const TabIcon = ({ icon, color, size, focused }) => (

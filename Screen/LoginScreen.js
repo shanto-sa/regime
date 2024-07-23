@@ -31,7 +31,7 @@ const LoginScreen = ({ navigation }) => {
       // Set user authentication status in global state
       // For example, using Redux or Context API
       // Then navigate to the HomeScreen
-      navigation.navigate('MainApp');
+      navigation.navigate('ProfileSet');
     } else {
       setErrortext('Invalid phone number');
       setLoading(false);
@@ -76,17 +76,19 @@ const LoginScreen = ({ navigation }) => {
                 blurOnSubmit={false}
               />
             </View>
-            {errortext != '' ? (
-              <Text style={styles.errorTextStyle}>
-                {errortext}
-              </Text>
-            ) : null}
+         
             <TouchableOpacity
               style={styles.buttonStyle}
               activeOpacity={0.5}
               onPress={handleSubmitPress}>
               <Text style={styles.buttonTextStyle}>تسجيل الدخول</Text>
             </TouchableOpacity>
+
+            {errortext != '' ? (
+              <Text style={styles.errorTextStyle}>
+                {errortext}
+              </Text>
+            ) : null}
             <Text
               style={styles.registerTextStyle}
               onPress={() => navigation.navigate('RegisterScreen')}>
