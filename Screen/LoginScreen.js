@@ -4,6 +4,7 @@ import {
   TextInput,
   View,
   Text,
+  Alert,
   ScrollView,
   Image,
   TouchableOpacity,
@@ -11,8 +12,22 @@ import {
 } from 'react-native';
 
 import Loader from './Components/Loader';
+import StringsOfLanguages from './StringsOfLanguages';
 
 const LoginScreen = ({ navigation }) => {
+
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+
+  const handleLanguageChange = (shortform) => {
+    setSelectedLanguage(shortform);
+    StringsOfLanguages.setLanguage(shortform);
+  };
+
+  const lang = [
+    { shortform: 'en', longform: 'English' },
+    { shortform: 'ar', longform: 'العربية' },
+  ];
+
   const [phoneNumber, setPhoneNumber] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
@@ -49,14 +64,39 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.overlay} />
       <View style={styles.mainBody}>
         <Loader loading={loading} />
+
+
+        <Text style={styles.text}>{StringsOfLanguages.first}</Text>
+        <Text style={styles.text}>{StringsOfLanguages.second}</Text>
+
         <View style={styles.cardContainer}>
           <KeyboardAvoidingView enabled>
-            <Text style={styles.headerText}>
-              تسجيل الدخول إلى حسابك
-            </Text>
-            <Text style={styles.subHeaderText}>
-              رجيم يمنحك الباقات الأنسب لك التي تحتاجها لبناء جسم صحي
-            </Text>
+
+
+
+          <View>
+      {lang.map((item, key) => (
+        <View style={styles.elementContainer} key={key}>
+          <Text
+            onPress={() => handleLanguageChange(item.shortform)}
+            style={[
+              styles.textStyle,
+              item.shortform === selectedLanguage ? styles.selectedLanguage : null,
+            ]}
+          >
+            {item.longform}
+          </Text>
+        </View>
+      ))}
+
+      <Text style={styles.headerText}>
+        {StringsOfLanguages.get('login_title')}
+      </Text>
+      <Text style={styles.subHeaderText}>
+        {StringsOfLanguages.get('login_sub_title')}
+      </Text>
+    </View>
+
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
@@ -76,7 +116,11 @@ const LoginScreen = ({ navigation }) => {
                 blurOnSubmit={false}
               />
             </View>
+
+
+       
          
+
             <TouchableOpacity
               style={styles.buttonStyle}
               activeOpacity={0.5}
