@@ -1,0 +1,235 @@
+import React, { useState, createRef } from 'react';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from 'react-native';
+
+import Loader from './Components/Loader';
+
+const ConfirmCodeScreen = ({ navigation }) => {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [validationCode, setValidationCode] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errortext, setErrortext] = useState('');
+
+  const phoneNumberRef = createRef();
+  const validationCodeRef = createRef();
+
+  const handleSubmitPress = () => {
+    setErrortext('');
+    if (!phoneNumber || !validationCode) {
+      setErrortext('Please fill both Phone Number and Validation Code');
+      return;
+    }
+    setLoading(true);
+    
+    // API call to validate the code
+    validateCode(phoneNumber, validationCode)
+      .then((response) => {
+        setLoading(false);
+        if (response.isValid) {
+          navigation.navigate('ProfileSet');
+        } else {
+          setErrortext('Invalid validation code. Please try again.');
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        setErrortext('An error occurred. Please try again.');
+        console.error(error);
+      });
+  };
+
+  // Mock API call function - replace this with your actual API call
+  const validateCode = (phone, code) => {
+    return new Promise((resolve, reject) => {
+      // Simulating API call
+      setTimeout(() => {
+        // For demo purposes, let's say the code is valid if it's "1234"
+        if (code === "1234") {
+          resolve({ isValid: true });
+        } else {
+          resolve({ isValid: false });
+        }
+      }, 1000);
+    });
+  };
+
+  return (
+    <ScrollView
+      contentContainerStyle={styles.container}
+      keyboardShouldPersistTaps="handled">
+      <View style={styles.overlay} />
+
+      <TouchableOpacity style={styles.topRightArrowContainer}>
+        <Image
+          source={require('../Image/arrow2.png')}
+          style={styles.topRightArrow}
+        />
+      </TouchableOpacity>
+      
+      <View style={styles.mainBody}>
+        <Loader loading={loading} />
+
+        <View style={styles.cardContainer}>
+          <KeyboardAvoidingView enabled>
+          <Text style={styles.headerText}>
+              تسجيل الدخول إلى حسابك
+            </Text>
+            <Text style={styles.subHeaderText}>
+              رجيم يمنحك الباقات الأنسب لك التي تحتاجها لبناء جسم صحي
+            </Text>
+            <View style={styles.SectionStyle}>
+              <TextInput
+                style={styles.inputStyle}
+                onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
+                placeholder="رقم الهاتف"
+                placeholderTextColor="#8b9cb5"
+                keyboardType="phone-pad"
+                returnKeyType="next"
+                onSubmitEditing={() => validationCodeRef.current && validationCodeRef.current.focus()}
+                underlineColorAndroid="#f000"
+                blurOnSubmit={false}
+                ref={phoneNumberRef}
+              />
+            </View>
+            <View style={styles.SectionStyle}>
+              <TextInput
+                style={styles.inputStyle}
+                onChangeText={(validationCode) => setValidationCode(validationCode)}
+                placeholder="رمز التحقق"
+                placeholderTextColor="#8b9cb5"
+                keyboardType="number-pad"
+                returnKeyType="done"
+                onSubmitEditing={handleSubmitPress}
+                underlineColorAndroid="#f000"
+                blurOnSubmit={false}
+                ref={validationCodeRef}
+              />
+            </View>
+
+            <TouchableOpacity
+              style={styles.buttonStyle}
+              activeOpacity={0.5}
+              onPress={handleSubmitPress}>
+              <Text style={styles.buttonTextStyle}>تسجيل الدخول</Text>
+            </TouchableOpacity>
+
+          </KeyboardAvoidingView>
+        </View>
+
+        {errortext != '' ? (
+          <Text style={styles.errorTextStyle}>{errortext}</Text>
+        ) : null}
+        
+       
+      </View>
+    </ScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flexGrow: 1,
+        backgroundColor: '#F6F6F6',
+      },
+      overlay: {
+        position: 'absolute',
+        width: '100%',
+        height: '30%',
+        zIndex: 1,
+      },
+      mainBody: {
+        flex: 1,
+        marginTop: '30%',
+        margin: '5%',
+        position: 'relative', // Added position relative
+      },
+      topRightArrowContainer: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        zIndex: 2,
+      },
+      topRightArrow: {
+        width: 30,
+        height: 30,
+      },
+      cardContainer: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 60,
+        elevation: 5,
+      },
+      headerText: {
+        fontSize: 24,
+        fontWeight: '900',
+        color: '#000000',
+        textAlign: 'center',
+        marginBottom: 20,
+      },
+      SectionStyle: {
+        flexDirection: 'row',
+        height: 40,
+        marginTop: 20,
+      },
+      inputStyle: {
+        flex: 1,
+        color: 'black',
+        paddingLeft: 15,
+        paddingRight: 15,
+        height: 52,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#dadae8',
+      },
+      errorTextStyle: {
+        color: 'red',
+        textAlign: 'center',
+        fontSize: 14,
+        paddingTop:15
+      },
+      bottomArrowContainer: {
+        alignItems: 'center',
+        marginTop: 70,
+      },
+
+      buttonStyle: {
+        backgroundColor: '#006F34',
+        borderWidth: 0,
+        color: '#FFFFFF',
+        borderColor: '#7DE24E',
+        height: 52,
+        alignItems: 'center',
+        borderRadius: 10,
+        marginTop: 50,
+        marginBottom: 10,
+      },
+      buttonTextStyle: {
+        color: '#FFFFFF',
+        paddingVertical: 15,
+        fontSize: 16,
+      },
+      bottomArrow: {
+        position: 'relative',
+        padding: 20, //
+        borderWidth: 1,
+        borderColor: '#067737',
+        borderRadius: 50,
+      },
+      bottomArrowImage: {
+        width: 22,
+        height: 22,
+        resizeMode: 'contain',
+        tintColor: '#067737',
+      },
+});
+
+export default ConfirmCodeScreen;

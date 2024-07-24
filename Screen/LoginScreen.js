@@ -31,7 +31,7 @@ const LoginScreen = ({ navigation }) => {
       // Set user authentication status in global state
       // For example, using Redux or Context API
       // Then navigate to the HomeScreen
-      navigation.navigate('ProfileSet');
+      navigation.navigate('ConfirmCode');
     } else {
       setErrortext('Invalid phone number');
       setLoading(false);
@@ -89,11 +89,11 @@ const LoginScreen = ({ navigation }) => {
                 {errortext}
               </Text>
             ) : null}
-            <Text
+            {/* <Text
               style={styles.registerTextStyle}
               onPress={() => navigation.navigate('RegisterScreen')}>
               New Here? Register
-            </Text>
+            </Text> */}
           </KeyboardAvoidingView>
         </View>
       </View>

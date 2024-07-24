@@ -185,11 +185,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     tintColor: '#067737',
   },
-
-
-
-
-
 });
 
 export default ProfileSetScreen;

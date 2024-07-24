@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, SafeAreaView, StyleSheet, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -18,6 +18,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* Main Card */}
+      <ScrollView>
       <View style={styles.card}>
         <Text style={styles.infoText}>
           أنت الآن مشترك في
@@ -87,7 +88,7 @@ const HomeScreen = () => {
 </View>
 
 
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      {/* <ScrollView contentContainerStyle={styles.scrollViewContent}> */}
             {/* Additional Card */}
             <View style={styles.card2}>
               <View style={styles.centerContent}>
@@ -105,6 +106,7 @@ const HomeScreen = () => {
                 </TouchableOpacity>
               </View>
             </View>
+          {/* </ScrollView> */}
           </ScrollView>
     </SafeAreaView>
   );

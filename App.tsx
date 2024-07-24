@@ -10,6 +10,7 @@ import SplashScreen from './Screen/SplashScreen';
 import LoginScreen from './Screen/LoginScreen';
 import LoginCodeScreen from './Screen/LoginCodeScreen';
 import ProfileSetScreen from './Screen/ProfileSetScreen';
+import ConfirmCodeScreen from './Screen/ConfirmCodeScreen';
 import GoalScreen from './Screen/GoalScreen';
 import GenderScreen from './Screen/GenderScreen';
 import HWScreen from './Screen/HWScreen';
@@ -322,6 +323,12 @@ const AuthStackScreen = () => {
        <AuthStack.Screen
               name="ProfileSet"
               component={ProfileSetScreen}
+                options={{ headerShown: false }}
+            />
+
+       <AuthStack.Screen
+              name="ConfirmCode"
+              component={ConfirmCodeScreen}
                 options={{ headerShown: false }}
             />
 

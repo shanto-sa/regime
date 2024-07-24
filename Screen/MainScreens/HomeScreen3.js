@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text, Button, SafeAreaView, StyleSheet, Image, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 import { useNavigation } from '@react-navigation/native';
-
-
 
 
 const HomeScreen = () => {
@@ -19,6 +17,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* Main Card */}
+      <ScrollView>
       <View style={styles.card}>
         <Text style={styles.infoText}>
           أنت الآن مشترك في
@@ -87,7 +86,7 @@ const HomeScreen = () => {
   </View>
 </View>
 
-<ScrollView contentContainerStyle={styles.scrollViewContent}>
+{/* <ScrollView contentContainerStyle={styles.scrollViewContent}> */}
             {/* Additional Card */}
             <View style={styles.card2}>
               <View style={styles.centerContent}>
@@ -105,6 +104,7 @@ const HomeScreen = () => {
                 </TouchableOpacity>
               </View>
             </View>
+          {/* </ScrollView> */}
           </ScrollView>
     </SafeAreaView>
   );
