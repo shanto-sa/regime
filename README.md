@@ -5,12 +5,6 @@ A feature-rich React Native application that provides a comprehensive solution f
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Getting Started
 
@@ -27,7 +21,17 @@ A feature-rich React Native application that provides a comprehensive solution f
    ```bash
    git clone https://github.com/shanto-sa/regime.git
 
+2. Project Directori:
+
 ```bash
    cd regime
+
+3. Node Module Install:
+
+   ```bash
    npm install
+
+4. Run The Project:
+
+   ```bash
    npx react-native run-android
