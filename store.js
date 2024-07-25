@@ -3,11 +3,12 @@ import { persistStore, persistReducer } from 'redux-persist';
 
 import AsyncStorage from 'react-native-encrypted-storage';
 import authReducer from './slices/authSlice';
+import contactReducer from './slices/contactSlice';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth'] // only auth will be persisted
+  whitelist: ['auth', 'contact'], // only auth will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
@@ -15,6 +16,7 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
+    contact: contactReducer,
     // other reducers...
   },
   middleware: (getDefaultMiddleware) =>

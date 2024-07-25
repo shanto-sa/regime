@@ -1,14 +1,29 @@
 import * as React from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendContactUsMessage } from '../../slices/contactSlice';
 
 const ContactUsScreen = () => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.contact);
+  const [title, setTitle] = React.useState('');
+  const [file, setFile] = React.useState(null);
+  const [message, setMessage] = React.useState('');
+
+  const handleSendMessage = () => {
+    const messageData = {
+      title,
+      file,
+      message,
+    };
+    dispatch(sendContactUsMessage(messageData));
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.header}>
-            تواصل معنا
-          </Text>
+          <Text style={styles.header}>تواصل معنا</Text>
           <Image source={require('../../Image/regimelogo.png')} style={styles.image} />
           <View style={styles.yellowLine} />
           <Text style={styles.text}>
@@ -17,14 +32,44 @@ const ContactUsScreen = () => {
             {'\n'}
             أو يمكنك إرسال رسالة نصية إلى فريق الدعم
           </Text>
-          <TextInput style={styles.input} placeholder="عنوان الرسالة" />
+          <TextInput
+            style={styles.input}
+            placeholder="عنوان الرسالة"
+            value={title}
+            onChangeText={setTitle}
+            accessibilityLabel="Message title"
+          />
           <View style={styles.fileUploadContainer}>
             <Image source={require('../../Image/download.png')} style={styles.fileUploadIcon} />
-            <TextInput style={styles.fileUploadInput} placeholder="رفع ملف" />
+            <TextInput
+              style={styles.fileUploadInput}
+              placeholder="رفع ملف"
+              value={file?.name || ''}
+              onChangeText={(text) => setFile({ name: text })}
+              accessibilityLabel="File upload"
+            />
           </View>
-          <TextInput style={styles.messageInput} placeholder="الرسالة" multiline={true} numberOfLines={4} />
-          <TouchableOpacity style={styles.sendButton}>
-            <Text style={styles.sendButtonText}>إرسال</Text>
+          <TextInput
+            style={styles.messageInput}
+            placeholder="الرسالة"
+            multiline={true}
+            numberOfLines={4}
+            value={message}
+            onChangeText={setMessage}
+            accessibilityLabel="Message"
+          />
+          {error && <Text style={styles.errorText}>{error}</Text>}
+          <TouchableOpacity
+            style={[styles.sendButton, loading && styles.disabledButton]}
+            onPress={handleSendMessage}
+            disabled={loading}
+            accessibilityLabel="Send message"
+          >
+            {loading ? (
+              <ActivityIndicator color="#FFFFFF" />
+            ) : (
+              <Text style={styles.sendButtonText}>إرسال</Text>
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -33,6 +78,13 @@ const ContactUsScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  errorText: {
+    color: '#FF0000',
+    marginTop: 10,
+  },
+  disabledButton: {
+    opacity: 0.5,
+  },
   container: {
     flex: 1,
     alignItems: 'center',

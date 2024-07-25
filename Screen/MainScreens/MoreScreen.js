@@ -3,7 +3,7 @@ import { View, Button, Text, SafeAreaView, TouchableOpacity, Image, ScrollView }
 import { useNavigation } from '@react-navigation/native'; 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAuthenticated, logout } from '../../slices/authSlice';
+import { selectIsAuthenticated, logout , selectUserData} from '../../slices/authSlice';
 
 
 const ProfileCard = ({ name, phoneNumber }) => {
@@ -12,6 +12,7 @@ const ProfileCard = ({ name, phoneNumber }) => {
   const handleProfilePress = () => {
     navigation.navigate('EditInfo'); // Navigate to EditProfileScreen
   };
+
 
   const handleEditPress = () => {
     navigation.navigate('EditInfo'); // Navigate to EditProfileScreen
@@ -66,6 +67,7 @@ const MoreScreen = () => {
     // navigation.navigate('Login');
   };
 
+  const userData = useSelector(selectUserData);
 
   const handleOptionPress = (option) => {
     switch (option) {
@@ -106,7 +108,11 @@ const MoreScreen = () => {
     
          <Text style={{ fontSize: 24, marginBottom: 16, textAlign: 'center', color:'#000000',  fontWeight: 'bold',  }}>البروفايل</Text>
 
-          <ProfileCard name="ماريا العقبي" phoneNumber="0597128218" />
+          <ProfileCard 
+          name={userData?.name || 'User'}
+          phoneNumber="0597128218" />
+
+
           <Text style={{ fontSize: 18, marginBottom: 16, color:'#000000',  fontWeight: 'bold', }}>البروفايل</Text>
           <View style={{ backgroundColor:'#ffffff', padding:10, borderRadius: 30, }}>
           <OptionCard title="إضافة العناوين" onPress={() => handleOptionPress('ListAddress')} icon={require('../../Image/more/1.png')} />
@@ -114,7 +120,7 @@ const MoreScreen = () => {
           </View>
           <Text style={{ fontSize: 18, marginBottom: 16, marginTop: 16, color:'#000000',  fontWeight: 'bold', }}>الخصوصية</Text>
           <View style={{ backgroundColor:'#ffffff', padding:10, borderRadius: 30, marginBottom:60 }}>
-          <OptionCard title="سياسة الخصوصية" onPress={() => handleOptionPress('PrivacyPolicy')} icon={require('../../Image/more/3.png')} />
+          {/* <OptionCard title="سياسة الخصوصية" onPress={() => handleOptionPress('PrivacyPolicy')} icon={require('../../Image/more/3.png')} /> */}
           <OptionCard title="الشروط والأحكام" onPress={() => handleOptionPress('TermsAndCondition')} icon={require('../../Image/more/4.png')} />
           <OptionCard title="عن التطبيق" onPress={() => handleOptionPress('WhoWeAre')} icon={require('../../Image/more/5.png')} />
           <OptionCard title="الدعم الفني" onPress={() => handleOptionPress('TechnicalSupport')} icon={require('../../Image/more/6.png')} />

@@ -5,18 +5,13 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 
-
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image, View, Text, LogBox } from 'react-native';
 
-
 import { useSelector, useDispatch } from 'react-redux';
 import { selectIsAuthenticated } from './slices/authSlice';
-
-import { loginUser } from './slices/authSlice';
 
 // Import Screens
 import SplashScreen from './Screen/SplashScreen';
@@ -29,15 +24,12 @@ import GenderScreen from './Screen/GenderScreen';
 import HWScreen from './Screen/HWScreen';
 import DobScreen from './Screen/DobScreen';
 
-
 //Imported Home Tab Sub-Screens
 import ChoosePlanScreen from './Screen/Subscription/ChoosePlanScreen';
 import PlanDetailsScreen from './Screen/Subscription/PlanDetailsScreen';
 import PlanDaysScreen from './Screen/Subscription/PlanDaysScreen';
 import PayNowScreen from './Screen/Subscription/PayNowScreen';
-
 import AddMealScreen from './Screen/AddMealScreen';
-
 
 // Imported Static Screens
 import PrivacyPolicyScreen from './Screen/Statics/PrivacyPolicyScreen';
@@ -47,9 +39,7 @@ import TechnicalSupportScreen from './Screen/Statics/TechnicalSupportScreen';
 import ContactUsScreen from './Screen/Statics/ContactUsScreen';
 import VacationScreen from './Screen/Statics/VacationScreen';
 import EditInfoScreen from './Screen/EditInfoScreen';
-
 import ListAddress from './Screen/Components/ListAddress';
-
 import RegisterScreen from './Screen/RegisterScreen';
 import HomeScreen from './Screen/MainScreens/HomeScreen3';
 import CartScreen from './Screen/MainScreens/CartScreen';
