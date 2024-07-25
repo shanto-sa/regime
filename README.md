@@ -21,7 +21,7 @@ A feature-rich React Native application that provides a comprehensive solution f
    ```bash
    git clone https://github.com/shanto-sa/regime.git
 
-2. Project Directori:
+2. Project Folder:
 
    ```bash
    cd regime

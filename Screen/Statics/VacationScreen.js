@@ -1,22 +1,32 @@
 import * as React from 'react';
 import { View, Text, SafeAreaView, StyleSheet, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { setStartDate, setEndDate, submitVacation } from '../../slices/vacationSlice';
+
 const VacationScreen = () => {
-  const [startDate, setStartDate] = React.useState('');
-  const [endDate, setEndDate] = React.useState('');
+
+  const dispatch = useDispatch();
+  const { startDate, endDate, isLoading, error } = useSelector(
+    (state) => state.vacation
+  );
 
   const handleStartDateChange = (date) => {
-    setStartDate(date);
+    dispatch(setStartDate(date));
   };
 
   const handleEndDateChange = (date) => {
-    setEndDate(date);
+    dispatch(setEndDate(date));
   };
 
   const handleSubmit = () => {
-    // Handle submission logic here
-    console.log("Submitted: Start Date:", startDate, "End Date:", endDate);
-    // You can add further logic like sending data to server, etc.
+    const vacationData = {
+      startDate,
+      endDate,
+    };
+
+    
+    dispatch(submitVacation(vacationData));
   };
 
   return (
