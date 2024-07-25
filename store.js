@@ -5,11 +5,12 @@ import AsyncStorage from 'react-native-encrypted-storage';
 import authReducer from './slices/authSlice';
 import contactReducer from './slices/contactSlice';
 import vacationSlice from './slices/vacationSlice'; 
+import commonDataSlice from './slices/commonDataSlice'; 
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth', 'contact', 'vacation'], // only auth will be persisted
+  whitelist: ['auth', 'contact', 'vacation', 'commonData'], // only auth will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
@@ -19,6 +20,8 @@ export const store = configureStore({
     auth: persistedReducer,
     contact: contactReducer,
     vacation: vacationSlice.reducer,
+    commonData: commonDataSlice,
+
     // other reducers...
   },
   middleware: (getDefaultMiddleware) =>

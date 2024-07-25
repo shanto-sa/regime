@@ -12,26 +12,31 @@ import {
 } from 'react-native';
 
 import Loader from './Components/Loader';
-import StringsOfLanguages from './StringsOfLanguages';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../slices/authSlice';
+
+import { setLanguage } from '../slices/commonDataSlice';
+
+
 
 const LoginScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
 
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
+
+
+
+  const { language = 'en', strings } = useSelector((state) => state.commonData);
+
+
 
   const handleLanguageChange = (shortform) => {
-    setSelectedLanguage(shortform);
-    StringsOfLanguages.setLanguage(shortform);
+    dispatch(setLanguage(shortform));
   };
 
-  const lang = [
-    { shortform: 'en', longform: 'English' },
-    { shortform: 'ar', longform: 'العربية' },
-  ];
+  
 
   const [phoneNumber, setPhoneNumber] = useState('');
   // const [loading, setLoading] = useState(false);
@@ -74,22 +79,21 @@ const LoginScreen = ({ navigation }) => {
         <Loader loading={loading} />
 
 
-        <Text style={styles.text}>{StringsOfLanguages.first}</Text>
-        <Text style={styles.text}>{StringsOfLanguages.second}</Text>
-
+    
         <View style={styles.cardContainer}>
           <KeyboardAvoidingView enabled>
 
-
-
           <View>
-      {lang.map((item, key) => (
+      {[
+        { shortform: 'en', longform: 'English' },
+        { shortform: 'ar', longform: 'العربية' },
+      ].map((item, key) => (
         <View style={styles.elementContainer} key={key}>
           <Text
             onPress={() => handleLanguageChange(item.shortform)}
             style={[
               styles.textStyle,
-              item.shortform === selectedLanguage ? styles.selectedLanguage : null,
+              item.shortform === language ? styles.selectedLanguage : null,
             ]}
           >
             {item.longform}
@@ -97,13 +101,14 @@ const LoginScreen = ({ navigation }) => {
         </View>
       ))}
 
-      <Text style={styles.headerText}>
-        {StringsOfLanguages.get('login_title')}
+<Text style={styles.headerText}>
+        {strings.login_title}
       </Text>
       <Text style={styles.subHeaderText}>
-        {StringsOfLanguages.get('login_sub_title')}
+        {strings.login_sub_title}
       </Text>
     </View>
+
 
             <View style={styles.SectionStyle}>
               <TextInput
