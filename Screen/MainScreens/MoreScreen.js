@@ -1,6 +1,10 @@
 import React from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Button, Text, SafeAreaView, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
+
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsAuthenticated, logout } from '../../slices/authSlice';
+
 
 const ProfileCard = ({ name, phoneNumber }) => {
 
@@ -52,7 +56,17 @@ const OptionCard = ({ title, onPress, icon }) => {
 
 
 const MoreScreen = () => {
+
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    // navigation.navigate('Login');
+  };
+
+
   const handleOptionPress = (option) => {
     switch (option) {
       case 'PrivacyPolicy':
@@ -87,6 +101,9 @@ const MoreScreen = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={{ padding: 16 }}>
+
+        
+    
          <Text style={{ fontSize: 24, marginBottom: 16, textAlign: 'center', color:'#000000',  fontWeight: 'bold',  }}>البروفايل</Text>
 
           <ProfileCard name="ماريا العقبي" phoneNumber="0597128218" />
@@ -104,10 +121,14 @@ const MoreScreen = () => {
           <OptionCard title="تواصل معنا" onPress={() => handleOptionPress('ContactUs')} icon={require('../../Image/more/7.png')} />
           </View>
           <View style={{ marginBottom: 16, paddingBottom: 10 }}>
-            <TouchableOpacity style={{ padding: 16, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ color: 'red', fontSize: 18 }}>تسجيل الخروج</Text>
+          {isAuthenticated && (
+            <TouchableOpacity onPress={handleLogout} style={{ padding: 16, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={{ color: 'red', fontSize: 18 }}>  تسجيل الخروج</Text>
             </TouchableOpacity>
+               )}
           </View>
+
+
         </View>
       </ScrollView>
     </SafeAreaView>

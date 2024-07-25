@@ -11,55 +11,39 @@ import {
 } from 'react-native';
 
 import Loader from './Components/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { verifyOTP } from '../slices/authSlice';
 
 const ConfirmCodeScreen = ({ navigation }) => {
+
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
+
   const [phoneNumber, setPhoneNumber] = useState('');
   const [validationCode, setValidationCode] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [errortext, setErrortext] = useState('');
 
   const phoneNumberRef = createRef();
   const validationCodeRef = createRef();
 
   const handleSubmitPress = () => {
-    setErrortext('');
     if (!phoneNumber || !validationCode) {
-      setErrortext('Please fill both Phone Number and Validation Code');
+      // You can dispatch an action to set an error in Redux if you prefer
+      console.error('Please fill both Phone Number and Validation Code');
       return;
     }
-    setLoading(true);
-    
-    // API call to validate the code
-    validateCode(phoneNumber, validationCode)
-      .then((response) => {
-        setLoading(false);
-        if (response.isValid) {
-          navigation.navigate('ProfileSet');
-        } else {
-          setErrortext('Invalid validation code. Please try again.');
-        }
+
+    dispatch(verifyOTP({ phoneNumber, otp: validationCode }))
+      .unwrap()
+      .then(() => {
+        navigation.navigate('ProfileSet');
       })
       .catch((error) => {
-        setLoading(false);
-        setErrortext('An error occurred. Please try again.');
-        console.error(error);
+        // Error handling is done in the Redux slice
+        console.error('OTP verification failed:', error);
       });
   };
 
-  // Mock API call function - replace this with your actual API call
-  const validateCode = (phone, code) => {
-    return new Promise((resolve, reject) => {
-      // Simulating API call
-      setTimeout(() => {
-        // For demo purposes, let's say the code is valid if it's "1234"
-        if (code === "1234") {
-          resolve({ isValid: true });
-        } else {
-          resolve({ isValid: false });
-        }
-      }, 1000);
-    });
-  };
+
 
   return (
     <ScrollView
@@ -76,6 +60,7 @@ const ConfirmCodeScreen = ({ navigation }) => {
       
       <View style={styles.mainBody}>
         <Loader loading={loading} />
+      
 
         <View style={styles.cardContainer}>
           <KeyboardAvoidingView enabled>
@@ -124,8 +109,8 @@ const ConfirmCodeScreen = ({ navigation }) => {
           </KeyboardAvoidingView>
         </View>
 
-        {errortext != '' ? (
-          <Text style={styles.errorTextStyle}>{errortext}</Text>
+        {error ? (
+          <Text style={styles.errorTextStyle}>{error}</Text>
         ) : null}
         
        

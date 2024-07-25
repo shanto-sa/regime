@@ -13,8 +13,13 @@ import {
 
 import Loader from './Components/Loader';
 import StringsOfLanguages from './StringsOfLanguages';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../slices/authSlice';
 
 const LoginScreen = ({ navigation }) => {
+
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
 
   const [selectedLanguage, setSelectedLanguage] = useState('en');
 
@@ -29,34 +34,37 @@ const LoginScreen = ({ navigation }) => {
   ];
 
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
 
   const phoneInputRef = createRef();
 
+
   const handleSubmitPress = () => {
-    setErrortext('');
     if (!phoneNumber) {
       setErrortext('Please fill Phone Number');
       return;
     }
-    setLoading(true);
-    // Simulating login by checking against static credentials
-    if (phoneNumber === '12345678') {
-      // Set user authentication status in global state
-      // For example, using Redux or Context API
-      // Then navigate to the HomeScreen
-      navigation.navigate('ConfirmCode');
-    } else {
-      setErrortext('Invalid phone number');
-      setLoading(false);
-    }
+    
+    dispatch(loginUser(phoneNumber))
+      .unwrap()
+      .then(() => {
+        navigation.navigate('ConfirmCode');
+      })
+      .catch((err) => {
+        setErrortext(err.message || 'Invalid phone number');
+      });
   };
+
+
 
   return (
     <ScrollView
       contentContainerStyle={styles.container}
       keyboardShouldPersistTaps="handled">
+
+<Loader loading={loading} />
+
       <Image
         source={require('../Image/regime.jpg')}
         style={styles.backgroundImage}
@@ -128,11 +136,15 @@ const LoginScreen = ({ navigation }) => {
               <Text style={styles.buttonTextStyle}>تسجيل الدخول</Text>
             </TouchableOpacity>
 
-            {errortext != '' ? (
-              <Text style={styles.errorTextStyle}>
-                {errortext}
-              </Text>
-            ) : null}
+
+            {error ? (
+  <Text style={styles.errorTextStyle}>
+    {error}
+  </Text>
+) : null}
+
+
+           
             {/* <Text
               style={styles.registerTextStyle}
               onPress={() => navigation.navigate('RegisterScreen')}>

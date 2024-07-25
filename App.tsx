@@ -1,9 +1,22 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Provider } from 'react-redux';
+
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store';
+
+
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image, View, Text, LogBox } from 'react-native';
+
+
+import { useSelector, useDispatch } from 'react-redux';
+import { selectIsAuthenticated } from './slices/authSlice';
+
+import { loginUser } from './slices/authSlice';
 
 // Import Screens
 import SplashScreen from './Screen/SplashScreen';
@@ -371,10 +384,31 @@ const AuthStackScreen = () => {
   );
 };
 
+
 const App = () => {
   return (
+    <Provider store={store}>
+       <PersistGate loading={null} persistor={persistor}>
+      <RootNavigation />
+      </PersistGate>
+    </Provider>
+  );
+};
+
+
+const RootNavigation = () => {
+
+  // const dispatch = useDispatch();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
+  console.log('shanto', isAuthenticated);
+
+ 
+  return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="SplashScreen">
+      {/* <Stack.Navigator initialRouteName="SplashScreen"> */}
+      <Stack.Navigator initialRouteName={isAuthenticated ? 'MainApp' : 'SplashScreen'}>
+    
         {/* SplashScreen which will come once for 5 Seconds */}
         <Stack.Screen
           name="SplashScreen"
@@ -383,11 +417,13 @@ const App = () => {
           options={{ headerShown: false }}
         />
         {/* Auth Navigator: Include Login and Signup */}
+       
         <Stack.Screen
-          name="Auth"
-          component={AuthStackScreen}
-          options={{ headerShown: false }}
-        />
+              name="Auth"
+              component={isAuthenticated ? BottomTabNavigator : AuthStackScreen}
+              options={{ headerShown: false }}
+            />
+
         {/* Navigation for Home and Settings screens */}
         <Stack.Screen
           name="MainApp"

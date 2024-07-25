@@ -4,11 +4,17 @@ import { View, Text, ScrollView, SafeAreaView, StyleSheet, Image, Dimensions, To
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
+import { useSelector } from 'react-redux';
+import { selectUserData } from '../../slices/authSlice';
+
 import { useNavigation } from '@react-navigation/native';
 
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+
+  const userData = useSelector(selectUserData);
+
 
   const handlePlanDaysPress = () => {
     navigation.navigate('ChoosePlan');
@@ -17,6 +23,9 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* Main Card */}
+
+      <Text>Welcome, {userData?.name || 'User'}!</Text>
+
       <ScrollView>
       <View style={styles.card}>
         <Text style={styles.infoText}>
