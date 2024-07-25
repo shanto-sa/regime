@@ -21,12 +21,18 @@ A feature-rich React Native application that provides a comprehensive solution f
    ```bash
    git clone https://github.com/shanto-sa/regime.git
 
-# Project Directori:
--cd regime
+2. Project Directori:
 
-# Node Module Install:
--npm install
+   ```bash
+   cd regime
 
-# Run The Project:
--npx react-native run-android # for Android
--npx react-native run-ios # for iOS
+3. Node Module Install:
+
+   ```bash
+   npm install
+
+4. Run The Project
+
+   ```bash
+   npx react-native run-android # for Android
+   npx react-native run-ios # for iOS
