@@ -6,7 +6,7 @@ import languageStrings from '../Screen/languageStrings';
 const initialState = {
     theme: 'light',
     language: 'en',
-    strings: {},
+    strings: languageStrings.en,
   };
   
   const commonDataSlice = createSlice({
@@ -18,6 +18,7 @@ const initialState = {
       },
       setLanguage: (state, action) => {
         state.language = action.payload;
+        state.strings = languageStrings[action.payload];
       },
     },
   });

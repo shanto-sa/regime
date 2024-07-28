@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -12,38 +12,29 @@ import {
 } from 'react-native';
 
 import Loader from './Components/Loader';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../slices/authSlice';
-
 import { setLanguage } from '../slices/commonDataSlice';
-
-
 
 const LoginScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
+  const { language, strings } = useSelector((state) => state.commonData);
 
-
-
-
-  const { language = 'en', strings } = useSelector((state) => state.commonData);
-
-
+  useEffect(() => {
+    console.log('Language state:', language);
+  }, [language]);
 
   const handleLanguageChange = (shortform) => {
+    console.log('handleLanguageChange called with:', shortform);
     dispatch(setLanguage(shortform));
   };
-
-  
 
   const [phoneNumber, setPhoneNumber] = useState('');
   // const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
-
   const phoneInputRef = createRef();
-
 
   const handleSubmitPress = () => {
     if (!phoneNumber) {
@@ -61,14 +52,17 @@ const LoginScreen = ({ navigation }) => {
       });
   };
 
-
+  const languageOptions = [
+    { shortform: 'en', longform: 'English' },
+    { shortform: 'ar', longform: 'العربية' },
+  ];
 
   return (
     <ScrollView
       contentContainerStyle={styles.container}
       keyboardShouldPersistTaps="handled">
 
-<Loader loading={loading} />
+      <Loader loading={loading} />
 
       <Image
         source={require('../Image/regime.jpg')}
@@ -78,38 +72,14 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.mainBody}>
         <Loader loading={loading} />
 
-
-    
         <View style={styles.cardContainer}>
           <KeyboardAvoidingView enabled>
-
-          <View>
-      {[
-        { shortform: 'en', longform: 'English' },
-        { shortform: 'ar', longform: 'العربية' },
-      ].map((item, key) => (
-        <View style={styles.elementContainer} key={key}>
-          <Text
-            onPress={() => handleLanguageChange(item.shortform)}
-            style={[
-              styles.textStyle,
-              item.shortform === language ? styles.selectedLanguage : null,
-            ]}
-          >
-            {item.longform}
-          </Text>
-        </View>
-      ))}
-
-<Text style={styles.headerText}>
-        {strings.login_title}
-      </Text>
-      <Text style={styles.subHeaderText}>
-        {strings.login_sub_title}
-      </Text>
-    </View>
-
-
+        <Text style={styles.headerText}>
+          {strings.login_title}
+        </Text>
+        <Text style={styles.subHeaderText}>
+          {strings.login_sub_title}
+        </Text>
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
@@ -129,27 +99,39 @@ const LoginScreen = ({ navigation }) => {
                 blurOnSubmit={false}
               />
             </View>
-
-
-       
-         
-
             <TouchableOpacity
               style={styles.buttonStyle}
               activeOpacity={0.5}
               onPress={handleSubmitPress}>
               <Text style={styles.buttonTextStyle}>تسجيل الدخول</Text>
             </TouchableOpacity>
-
-
+            <View style={styles.container}>
+        {languageOptions.map((item, key) => (
+          <TouchableOpacity
+            style={[
+              styles.languageButton,
+              item.shortform === language ? styles.selectedLanguageButton : null,
+            ]}
+            key={key}
+            onPress={() => handleLanguageChange(item.shortform)}
+          >
+            <Text
+              style={[
+                styles.languageText,
+                item.shortform === language ? styles.selectedLanguageText : null,
+              ]}
+            >
+              {item.longform}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+  
             {error ? (
   <Text style={styles.errorTextStyle}>
     {error}
   </Text>
 ) : null}
-
-
-           
             {/* <Text
               style={styles.registerTextStyle}
               onPress={() => navigation.navigate('RegisterScreen')}>
@@ -246,6 +228,24 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     fontSize: 14,
+  },
+  languageButton: {
+    backgroundColor: '#f0f0f0',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 20,
+    marginHorizontal: 8,
+  },
+  selectedLanguageButton: {
+    backgroundColor: '#007AFF',
+  },
+
+  languageText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  selectedLanguageText: {
+    color: '#fff',
   },
 });
 

@@ -2,7 +2,7 @@
 const languageStrings = {
   en: {
     login_title: 'Login',
-    login_sub_title: 'Please enter your credentials',
+    login_sub_title: 'Please enter your credentials 12',
     // Add more English strings here
   },
   ar: {

@@ -14,7 +14,6 @@ const HomeScreen = () => {
     navigation.navigate('AddMeal');
   };
 
-
   return (
     <SafeAreaView style={styles.container}>
       {/* Main Card */}
