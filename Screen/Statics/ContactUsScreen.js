@@ -9,6 +9,7 @@ const ContactUsScreen = () => {
   const [title, setTitle] = React.useState('');
   const [file, setFile] = React.useState(null);
   const [message, setMessage] = React.useState('');
+  const { strings } = useSelector((state) => state.commonData);
 
   const handleSendMessage = () => {
     const messageData = {
@@ -23,18 +24,18 @@ const ContactUsScreen = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.header}>تواصل معنا</Text>
+          <Text style={styles.header}>{strings.contact_header}</Text>
           <Image source={require('../../Image/regimelogo.png')} style={styles.image} />
           <View style={styles.yellowLine} />
           <Text style={styles.text}>
-            تواصل معنا عبر
+            {strings.ctext1}
             <Text style={styles.boldText}> 966136765068+</Text>
             {'\n'}
-            أو يمكنك إرسال رسالة نصية إلى فريق الدعم
+            {strings.ctext2}
           </Text>
           <TextInput
             style={styles.input}
-            placeholder="عنوان الرسالة"
+            placeholder={strings.titlePlaceholder}
             value={title}
             onChangeText={setTitle}
             accessibilityLabel="Message title"
@@ -43,7 +44,7 @@ const ContactUsScreen = () => {
             <Image source={require('../../Image/download.png')} style={styles.fileUploadIcon} />
             <TextInput
               style={styles.fileUploadInput}
-              placeholder="رفع ملف"
+              placeholder={strings.fileUploadPlaceholder}
               value={file?.name || ''}
               onChangeText={(text) => setFile({ name: text })}
               accessibilityLabel="File upload"
@@ -51,7 +52,7 @@ const ContactUsScreen = () => {
           </View>
           <TextInput
             style={styles.messageInput}
-            placeholder="الرسالة"
+            placeholder={strings.messagePlaceholder}
             multiline={true}
             numberOfLines={4}
             value={message}
@@ -68,7 +69,7 @@ const ContactUsScreen = () => {
             {loading ? (
               <ActivityIndicator color="#FFFFFF" />
             ) : (
-              <Text style={styles.sendButtonText}>إرسال</Text>
+              <Text style={styles.sendButtonText}>{strings.sendButtonText}</Text>
             )}
           </TouchableOpacity>
         </View>

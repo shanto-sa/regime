@@ -18,6 +18,13 @@ const languageStrings = {
     logout_button_text: 'Log out',
     language_title: 'Language',
     language_header: 'Language Settings',
+    contact_header: 'Contact Us',
+    titlePlaceholder: 'Message title',
+    fileUploadPlaceholder: 'Upload file',
+    messagePlaceholder: 'Message',
+    sendButtonText: 'Send',
+    ctext1:'Contact us via',
+    ctext2:'or you can send a text message to the support team',
   },
   ar: {
     login_title: 'تسجيل الدخول إلى حسابك',
@@ -38,6 +45,13 @@ const languageStrings = {
     logout_button_text: 'تسجيل الخروج',
     language_title: 'اللغة',
     language_header: 'إعدادات اللغة',
+    contact_header: 'تواصل معنا',
+    titlePlaceholder: 'عنوان الرسالة',
+    fileUploadPlaceholder: 'رفع ملف',
+    messagePlaceholder: 'الرسالة',
+    sendButtonText: 'إرسال',
+    ctext1:'تواصل معنا عبر',
+    ctext2:'أو يمكنك إرسال رسالة نصية إلى فريق الدعم',
   },
 };
 
