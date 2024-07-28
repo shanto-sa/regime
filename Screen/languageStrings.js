@@ -25,6 +25,14 @@ const languageStrings = {
     sendButtonText: 'Send',
     ctext1:'Contact us via',
     ctext2:'or you can send a text message to the support team',
+    number_of_meals:'Number of meals consumed',
+    todays_meal:"Today's Meals",
+    no_meals:'No Meals Currently',
+    meal_message:"It seems you haven't subscribed to any plan yet. Once you subscribe, all your plans will appear here.",
+    subscribe_plan:'Subscribe to a Plan',
+    htext1:'You are currently subscribed to the',
+    htext2:'since ',
+    htext3:'and will expire in 26 days on'
   },
   ar: {
     login_title: 'تسجيل الدخول إلى حسابك',
@@ -52,6 +60,14 @@ const languageStrings = {
     sendButtonText: 'إرسال',
     ctext1:'تواصل معنا عبر',
     ctext2:'أو يمكنك إرسال رسالة نصية إلى فريق الدعم',
+    number_of_meals:'عدد الوجبات المستهلكة',
+    todays_meal:"وجبات اليوم",
+    no_meals:'لا توجد وجبات حاليا',
+    meal_message:"يبدو أنك لم تشترك في أي خطة حتى الآن. بمجرد الاشتراك ، ستظهر جميع خططك هنا.",
+    subscribe_plan:'الاشتراك في خطة',
+    htext1:'أنت مشترك حاليا في',
+    htext2:'منذ',
+    htext3:'وستنتهي صلاحيتها في غضون 26 يوما'
   },
 };
 

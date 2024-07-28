@@ -19,6 +19,7 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
 
   const { HomeData, loading, error } = useSelector(state => state.home);
+  const {strings } = useSelector((state) => state.commonData);
 
   useEffect(() => {
     dispatch(fetchHomeData());
@@ -43,9 +44,9 @@ const HomeScreen = () => {
       <View style={styles.card}>
       {HomeData.map(home => (
         <Text style={styles.infoText}>
-          أنت الآن مشترك في
+          {strings.htext1}
           <Text style={styles.packageText}>  {home.subscription.package || 'باقة غير معروفة'}</Text>
-          منذ {home.subscription.startDate || '0'} و ستنتهي خلال 26 يومًا في تاريخ
+          {strings.htext2} {home.subscription.startDate || '0'} {strings.htext3}
           <Text style={styles.dateText}> {home.subscription.endDate || '0'} </Text>
         </Text>
            ))}
@@ -60,7 +61,7 @@ const HomeScreen = () => {
       <View style={styles.row}>
         <View style={styles.subCard}>
           <Text style={styles.boldText}>{home.stats.meals || '0'}</Text>
-          <Text>عدد الوجبات التي استهلكتها</Text>
+          <Text>{strings.number_of_meals}</Text>
           <Image
             source={require('../../Image/icon/food.png')}
             style={styles.icon}
@@ -70,7 +71,7 @@ const HomeScreen = () => {
         {/* Card 2 */}
         <View style={styles.subCard}>
           <Text style={styles.boldText}>{home.stats.rows || '0'}</Text>
-          <Text>عدد الوجبات التي استهلكتها</Text>
+          <Text>{strings.number_of_meals}</Text>
           <Image
             source={require('../../Image/icon/row.png')}
             style={styles.icon}
@@ -84,7 +85,7 @@ const HomeScreen = () => {
       <View style={styles.row}>
         <View style={styles.subCard}>
           <Text style={styles.boldText}>{home.stats2.meals || '0'}</Text>
-          <Text>عدد الوجبات التي استهلكتها</Text>
+          <Text>{strings.number_of_meals}</Text>
           <Image
             source={require('../../Image/icon/food2.png')}
             style={styles.icon}
@@ -93,7 +94,7 @@ const HomeScreen = () => {
         </View>
         <View style={styles.subCard}>
           <Text style={styles.boldText}>{home.stats2.rows || '0'}</Text>
-          <Text>عدد الوجبات التي استهلكتها</Text>
+          <Text>{strings.number_of_meals}</Text>
           <Image
             source={require('../../Image/icon/calender.png')}
             style={styles.icon}
@@ -106,7 +107,7 @@ const HomeScreen = () => {
 
       <View style={styles.rightContent}>
   <View style={styles.contentWrapper}>
-    <Text style={styles.todayText}>وجبات اليوم</Text>
+    <Text style={styles.todayText}>{strings.todays_meal}</Text>
     <Image
       source={require('../../Image/icon/cardicon.png')}
       resizeMode="contain"
@@ -125,10 +126,10 @@ const HomeScreen = () => {
                 />
               </View>
               <View style={styles.centerContent}>
-                <Text style={styles.noMealText}>لا يوجد وجبات حاليًا</Text>
-                <Text style={styles.noMealInfoText}>يبدو أنك لم تقم بالاشتراك في أي باقة , بمجرد ان تقوم بالاشتراك, جميع باقاتك ستظهر هنا</Text>
+                <Text style={styles.noMealText}>{strings.no_meals}</Text>
+                <Text style={styles.noMealInfoText}>{strings.meal_message}</Text>
                 <TouchableOpacity style={styles.addButton} onPress={handlePlanDaysPress}>
-                  <Text style={styles.addButtonText}>اشتراك في باقة</Text>
+                  <Text style={styles.addButtonText}>{strings.subscribe_plan}</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -253,7 +254,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   todayText: {
-    fontSize: screenWidth * 0.06,
+    fontSize: screenWidth * 0.04,
     fontWeight: 'bold',
     color: '#000000',
     marginRight: 10, // Adjust spacing as needed
@@ -276,7 +277,7 @@ const styles = StyleSheet.create({
     marginBottom: screenHeight * 0.02, // Add margin between image and text
   },
   noMealText: {
-    fontSize: screenWidth * 0.05,
+    fontSize: screenWidth * 0.04,
     fontWeight: 'bold',
     marginBottom: screenHeight * 0.01,
     color: '#000000'
@@ -289,15 +290,15 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: '#2CA545',
-    borderRadius: 5,
-    paddingVertical: screenHeight * 0.016,
+    borderRadius: 3,
+    paddingVertical: screenHeight * 0.014,
     paddingHorizontal: screenWidth * 0.04,
     marginTop: screenHeight * 0.01,
   },
   addButtonText: {
     color: '#FFF',
     fontWeight: 'bold',
-    fontSize: screenWidth * 0.04,
+    fontSize: screenWidth * 0.03,
   },
   card2Image: {
     width: screenWidth * 0.4,
