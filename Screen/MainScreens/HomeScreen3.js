@@ -15,15 +15,6 @@ const HomeScreen = () => {
 
   const userData = useSelector(selectUserData);
 
-  try {
-    const { commonData } = useSelector((state) => state.common);
-  } catch (error) {
-    console.error('Error accessing commonData:', error);
-  }
-
-  console.log('Redux store state:', state);
-  console.log('commonData:', commonData);
-
   const handlePlanDaysPress = () => {
     navigation.navigate('ChoosePlan');
   };

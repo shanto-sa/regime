@@ -1,12 +1,36 @@
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { submitPayment  } from '../../slices/paymentSlice';
+
 const PayNowScreen = () => {
+
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector(state => state.payment);
 
   const handlePaymentMethodSelection = (method) => {
     setSelectedPaymentMethod(method);
   };
+
+  const handleSubmit = () => {
+    // Prepare the payment data
+    const paymentData = {
+      packageName: 'اسم الباقة',
+      calories: '1000 من 1500 سعرة حرارية',
+      daysPerWeek: '5 أيام في الأسبوع',
+      days: 'السبت، احد، الاثنين، الثلاثاء، الأربعاء',
+      startDate: '15/12/2023',
+      price: '400',
+      paymentMethod: selectedPaymentMethod
+    };
+
+    // Dispatch the submitPayment action
+    dispatch(submitPayment(paymentData));
+  };
+
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -61,7 +85,12 @@ const PayNowScreen = () => {
         </View>
 
         {/* Submit button */}
-        <TouchableOpacity style={styles.submitButton}>
+        <TouchableOpacity 
+        style={[styles.submitButton, loading && styles.disabledButton]} 
+        onPress={handleSubmit}
+        disabled={loading}
+      >
+
           <Text style={styles.submitButtonText}>إتمام الطلب</Text>
         </TouchableOpacity>
       </View>
