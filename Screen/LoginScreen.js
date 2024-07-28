@@ -45,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
     dispatch(loginUser(phoneNumber))
       .unwrap()
       .then(() => {
-        navigation.navigate('ConfirmCode');
+        navigation.navigate('ConfirmCode', { phoneNumber: phoneNumber });
       })
       .catch((err) => {
         setErrortext(err.message || 'Invalid phone number');

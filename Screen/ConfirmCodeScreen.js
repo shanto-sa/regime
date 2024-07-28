@@ -15,17 +15,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { verifyOTP } from '../slices/authSlice';
 
 
-const ConfirmCodeScreen = ({ navigation }) => {
+const ConfirmCodeScreen = ({ route, navigation }) => {
 
   const { strings } = useSelector((state) => state.commonData);
 
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
 
-  const [phoneNumber, setPhoneNumber] = useState('');
+   // Get the phone number from the route parameters
+   const phoneNumber = route.params?.phoneNumber;
+
+   console.log(phoneNumber);
+
+
   const [validationCode, setValidationCode] = useState('');
 
-  const phoneNumberRef = createRef();
   const validationCodeRef = createRef();
 
   const handleSubmitPress = () => {
@@ -72,15 +76,16 @@ const ConfirmCodeScreen = ({ navigation }) => {
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
+                value={phoneNumber}
                 onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
                 placeholder={strings.phone_number_placeholder}
                 placeholderTextColor="#8b9cb5"
                 keyboardType="phone-pad"
+                editable={false}
                 returnKeyType="next"
                 onSubmitEditing={() => validationCodeRef.current && validationCodeRef.current.focus()}
                 underlineColorAndroid="#f000"
                 blurOnSubmit={false}
-                ref={phoneNumberRef}
               />
             </View>
             <View style={styles.SectionStyle}>

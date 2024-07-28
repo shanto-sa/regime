@@ -14,7 +14,7 @@ export const loginUser = createAsyncThunk(
   async (phoneNumber, { rejectWithValue }) => {
     try {
       // Check if the phone number is 12345678
-      if (phoneNumber === '12345678') {
+      if (phoneNumber) {
         const response = await simulateApiCall({ success: true, message: 'OTP sent successfully' });
         return response.data;
       } else {
@@ -31,10 +31,10 @@ export const verifyOTP = createAsyncThunk(
   async ({ phoneNumber, otp }, { rejectWithValue }) => {
     try {
       // Check if the phone number is 12345678 and OTP is 1234
-      if (phoneNumber === '12345678' && otp === '1234') {
+      if (phoneNumber === phoneNumber && otp === '1234') {
         const response = await simulateApiCall({
           success: true,
-          user: { id: 1, phoneNumber: '12345678', name: 'Test User' },
+          user: { id: 1, phoneNumber: phoneNumber, name: 'Shanto Halder' },
         });
         console.log('response:', response);
         return response.data.user;

@@ -102,7 +102,8 @@ const MoreScreen = () => {
          <Text style={{ fontSize: 24, marginBottom: 16, textAlign: 'center', color:'#000000',  fontWeight: 'bold',  }}> {strings.profile_title}</Text>
           <ProfileCard 
           name={userData?.name || 'User'}
-          phoneNumber="0597128218" />
+          phoneNumber={userData?.phoneNumber || '0597128218'}
+           />
           <Text style={{ fontSize: 18, marginBottom: 16, color:'#000000',  fontWeight: 'bold', }}> {strings.profile_section_title}</Text>
           <View style={{ backgroundColor:'#ffffff', padding:10, borderRadius: 30, }}>
           <OptionCard title={strings.add_address_title} onPress={() => handleOptionPress('ListAddress')} icon={require('../../Image/more/1.png')} />
