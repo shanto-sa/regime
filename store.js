@@ -7,11 +7,12 @@ import contactReducer from './slices/contactSlice';
 import vacationSlice from './slices/vacationSlice'; 
 import commonDataSlice from './slices/commonDataSlice'; 
 import paymentSlice from './slices/paymentSlice'; 
+import userProfileSlice from './slices/userProfileSlice'; 
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth', 'contact', 'vacation', 'commonData', 'payment'], // only auth will be persisted
+  whitelist: ['auth', 'contact', 'vacation', 'commonData', 'payment','userProfile'], // only auth will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
@@ -23,6 +24,7 @@ export const store = configureStore({
     vacation: vacationSlice.reducer,
     commonData: commonDataSlice,
     payment: paymentSlice,
+    userProfile: userProfileSlice,
 
     // other reducers...
   },
