@@ -62,7 +62,7 @@ const ConfirmCodeScreen = ({ route, navigation }) => {
       </TouchableOpacity>
       
       <View style={styles.mainBody}>
-        <Loader loading={loading} />
+        {/* <Loader loading={loading} /> */}
     
         <View style={styles.cardContainer}>
           <KeyboardAvoidingView enabled>
