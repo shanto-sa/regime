@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, Button, Text, SafeAreaView, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
-
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuthenticated, logout , selectUserData} from '../../slices/authSlice';
-
 
 const ProfileCard = ({ name, phoneNumber }) => {
 
@@ -12,7 +10,6 @@ const ProfileCard = ({ name, phoneNumber }) => {
   const handleProfilePress = () => {
     navigation.navigate('EditInfo'); // Navigate to EditProfileScreen
   };
-
 
   const handleEditPress = () => {
     navigation.navigate('EditInfo'); // Navigate to EditProfileScreen
@@ -61,6 +58,7 @@ const MoreScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  const { strings } = useSelector((state) => state.commonData);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -71,8 +69,8 @@ const MoreScreen = () => {
 
   const handleOptionPress = (option) => {
     switch (option) {
-      case 'PrivacyPolicy':
-        navigation.navigate('PrivacyPolicy'); // Navigate to PrivacyPolicyScreen
+      case 'LanguageSwith':
+        navigation.navigate('LanguageSwith'); // Navigate to LanguageSwith
         break;
       case 'TermsAndCondition':
         navigation.navigate('TermsAndCondition'); // Navigate to TermsAndConditionScreen
@@ -95,46 +93,36 @@ const MoreScreen = () => {
       default:
         break;
     }
-
-
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={{ padding: 16 }}>
-
-        
-    
-         <Text style={{ fontSize: 24, marginBottom: 16, textAlign: 'center', color:'#000000',  fontWeight: 'bold',  }}>البروفايل</Text>
-
+         <Text style={{ fontSize: 24, marginBottom: 16, textAlign: 'center', color:'#000000',  fontWeight: 'bold',  }}> {strings.profile_title}</Text>
           <ProfileCard 
           name={userData?.name || 'User'}
           phoneNumber="0597128218" />
-
-
-          <Text style={{ fontSize: 18, marginBottom: 16, color:'#000000',  fontWeight: 'bold', }}>البروفايل</Text>
+          <Text style={{ fontSize: 18, marginBottom: 16, color:'#000000',  fontWeight: 'bold', }}> {strings.profile_section_title}</Text>
           <View style={{ backgroundColor:'#ffffff', padding:10, borderRadius: 30, }}>
-          <OptionCard title="إضافة العناوين" onPress={() => handleOptionPress('ListAddress')} icon={require('../../Image/more/1.png')} />
-          <OptionCard title="إضافة إجازة" onPress={() => handleOptionPress('Vacation')} icon={require('../../Image/more/2.png')} />
+          <OptionCard title={strings.add_address_title} onPress={() => handleOptionPress('ListAddress')} icon={require('../../Image/more/1.png')} />
+          <OptionCard title={strings.add_vacation_title} onPress={() => handleOptionPress('Vacation')} icon={require('../../Image/more/2.png')} />
           </View>
-          <Text style={{ fontSize: 18, marginBottom: 16, marginTop: 16, color:'#000000',  fontWeight: 'bold', }}>الخصوصية</Text>
+          <Text style={{ fontSize: 18, marginBottom: 16, marginTop: 16, color:'#000000',  fontWeight: 'bold', }}> {strings.privacy_section_title}</Text>
           <View style={{ backgroundColor:'#ffffff', padding:10, borderRadius: 30, marginBottom:60 }}>
-          {/* <OptionCard title="سياسة الخصوصية" onPress={() => handleOptionPress('PrivacyPolicy')} icon={require('../../Image/more/3.png')} /> */}
-          <OptionCard title="الشروط والأحكام" onPress={() => handleOptionPress('TermsAndCondition')} icon={require('../../Image/more/4.png')} />
-          <OptionCard title="عن التطبيق" onPress={() => handleOptionPress('WhoWeAre')} icon={require('../../Image/more/5.png')} />
-          <OptionCard title="الدعم الفني" onPress={() => handleOptionPress('TechnicalSupport')} icon={require('../../Image/more/6.png')} />
-          <OptionCard title="تواصل معنا" onPress={() => handleOptionPress('ContactUs')} icon={require('../../Image/more/7.png')} />
+          <OptionCard title={strings.language_title} onPress={() => handleOptionPress('LanguageSwith')} icon={require('../../Image/more/3.png')} /> 
+          <OptionCard title={strings.terms_and_conditions_title} onPress={() => handleOptionPress('TermsAndCondition')} icon={require('../../Image/more/4.png')} />
+          <OptionCard title={strings.about_app_title} onPress={() => handleOptionPress('WhoWeAre')} icon={require('../../Image/more/5.png')} />
+          <OptionCard title={strings.technical_support_title} onPress={() => handleOptionPress('TechnicalSupport')} icon={require('../../Image/more/6.png')} />
+          <OptionCard title={strings.contact_us_title} onPress={() => handleOptionPress('ContactUs')} icon={require('../../Image/more/7.png')} />
           </View>
           <View style={{ marginBottom: 16, paddingBottom: 10 }}>
           {isAuthenticated && (
             <TouchableOpacity onPress={handleLogout} style={{ padding: 16, borderRadius: 16, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ color: 'red', fontSize: 18 }}>  تسجيل الخروج</Text>
+              <Text style={{ color: 'red', fontSize: 18 }}>{strings.logout_button_text}</Text>
             </TouchableOpacity>
                )}
           </View>
-
-
         </View>
       </ScrollView>
     </SafeAreaView>

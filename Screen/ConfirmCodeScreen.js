@@ -30,7 +30,6 @@ const ConfirmCodeScreen = ({ navigation }) => {
 
   const handleSubmitPress = () => {
     if (!phoneNumber || !validationCode) {
-      // You can dispatch an action to set an error in Redux if you prefer
       console.error('Please fill both Phone Number and Validation Code');
       return;
     }
@@ -41,12 +40,9 @@ const ConfirmCodeScreen = ({ navigation }) => {
         navigation.navigate('ProfileSet');
       })
       .catch((error) => {
-        // Error handling is done in the Redux slice
         console.error('OTP verification failed:', error);
       });
   };
-
-
 
   return (
     <ScrollView
@@ -77,7 +73,7 @@ const ConfirmCodeScreen = ({ navigation }) => {
               <TextInput
                 style={styles.inputStyle}
                 onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
-                placeholder="رقم الهاتف"
+                placeholder={strings.phone_number_placeholder}
                 placeholderTextColor="#8b9cb5"
                 keyboardType="phone-pad"
                 returnKeyType="next"
@@ -91,7 +87,7 @@ const ConfirmCodeScreen = ({ navigation }) => {
               <TextInput
                 style={styles.inputStyle}
                 onChangeText={(validationCode) => setValidationCode(validationCode)}
-                placeholder="رمز التحقق"
+                placeholder={strings.verification_code_placeholder}
                 placeholderTextColor="#8b9cb5"
                 keyboardType="number-pad"
                 returnKeyType="done"
@@ -106,7 +102,7 @@ const ConfirmCodeScreen = ({ navigation }) => {
               style={styles.buttonStyle}
               activeOpacity={0.5}
               onPress={handleSubmitPress}>
-              <Text style={styles.buttonTextStyle}>تسجيل الدخول</Text>
+              <Text style={styles.buttonTextStyle}>{strings.login_button_text}</Text>
             </TouchableOpacity>
 
           </KeyboardAvoidingView>
@@ -137,7 +133,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: '30%',
         margin: '5%',
-        position: 'relative', // Added position relative
+        position: 'relative',
       },
       topRightArrowContainer: {
         position: 'absolute',

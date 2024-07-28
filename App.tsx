@@ -32,7 +32,7 @@ import PayNowScreen from './Screen/Subscription/PayNowScreen';
 import AddMealScreen from './Screen/AddMealScreen';
 
 // Imported Static Screens
-import PrivacyPolicyScreen from './Screen/Statics/PrivacyPolicyScreen';
+import LanguageSwithScreen from './Screen/Statics/LanguageSwithScreen';
 import TermsAndConditionScreen from './Screen/Statics/TermsAndConditionScreen';
 import WhoWeAreScreen from './Screen/Statics/WhoWeAreScreen';
 import TechnicalSupportScreen from './Screen/Statics/TechnicalSupportScreen';
@@ -111,8 +111,8 @@ function MoreStack() {
         options={{headerShown: true , title: ''}}
       />
       <Stack.Screen
-        name="PrivacyPolicy"
-        component={PrivacyPolicyScreen}
+        name="LanguageSwith"
+        component={LanguageSwithScreen}
         options={{headerShown: true , title: ''}}
       />
       <Stack.Screen

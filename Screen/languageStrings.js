@@ -1,18 +1,43 @@
-// languageStrings.js
 const languageStrings = {
   en: {
     login_title: 'Login to your account',
     login_sub_title: 'Regimen provides the most suitable packages you need to build a healthy body',
     phone_number_placeholder: 'Phone number',
+    verification_code_placeholder: 'Verification code',
     login_button_text: 'Login',
-    // Add more English strings here
+    profile_title: 'Profile',
+    profile_section_title: 'Profile',
+    add_address_title: 'Add Addresses',
+    add_vacation_title: 'Add Vacation',
+    privacy_section_title: 'Privacy',
+    privacy_policy_title: 'Privacy Policy',
+    terms_and_conditions_title: 'Terms and Conditions',
+    about_app_title: 'About the App',
+    technical_support_title: 'Technical Support',
+    contact_us_title: 'Contact Us',
+    logout_button_text: 'Log out',
+    language_title: 'Language',
+    language_header: 'Language Settings',
   },
   ar: {
     login_title: 'تسجيل الدخول إلى حسابك',
     login_sub_title: 'رجيم يمنحك الباقات الأنسب لك التي تحتاجها لبناء جسم صحي',
     phone_number_placeholder: 'رقم الهاتف',
+    verification_code_placeholder: 'رمز التحقق',
     login_button_text: 'تسجيل الدخول',
-    // Add more Arabic strings here
+    profile_title: 'البروفايل',
+    profile_section_title: 'البروفايل',
+    add_address_title: 'إضافة العناوين',
+    add_vacation_title: 'إضافة إجازة',
+    privacy_section_title: 'الخصوصية',
+    privacy_policy_title: 'سياسة الخصوصية',
+    terms_and_conditions_title: 'الشروط والأحكام',
+    about_app_title: 'عن التطبيق',
+    technical_support_title: 'الدعم الفني',
+    contact_us_title: 'تواصل معنا',
+    logout_button_text: 'تسجيل الخروج',
+    language_title: 'اللغة',
+    language_header: 'إعدادات اللغة',
   },
 };
 
