@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
 
 // Address Card Component
 const AddressCard = ({ address }) => {
@@ -36,6 +37,13 @@ const AddressCard = ({ address }) => {
 };
 
 const ListAddress = () => {
+  
+  const navigation = useNavigation();
+
+  const handleAddAddressPress = () => {
+    navigation.navigate('AddAddress'); // Navigate to EditProfileScreen
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
       <ScrollView>
@@ -46,7 +54,7 @@ const ListAddress = () => {
           <AddressCard address="St, Khorais Bldg 4th floor, Jeddah 23526, Saudi Arabia" />
           {/* <AddressCard  address="St, Khorais Bldg 4th floor, Jeddah 23526, Saudi Arabia" /> */}
           {/* New Address Button */}
-          <TouchableOpacity style={styles.addButton}>
+          <TouchableOpacity style={styles.addButton} onPress={handleAddAddressPress}>
             <Image source={require('../../Image/icon/plus.png')} style={styles.plusIcon} />
             <Text style={styles.addButtonLabel}>إضافة عنوان جديد</Text>
           </TouchableOpacity>

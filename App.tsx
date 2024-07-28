@@ -39,6 +39,7 @@ import TechnicalSupportScreen from './Screen/Statics/TechnicalSupportScreen';
 import ContactUsScreen from './Screen/Statics/ContactUsScreen';
 import VacationScreen from './Screen/Statics/VacationScreen';
 import EditInfoScreen from './Screen/EditInfoScreen';
+import AddAddressScreen from './Screen/AddAddressScreen';
 import ListAddress from './Screen/Components/ListAddress';
 import RegisterScreen from './Screen/RegisterScreen';
 import HomeScreen from './Screen/MainScreens/HomeScreen3';
@@ -141,6 +142,13 @@ function MoreStack() {
         component={ListAddress}
         options={{headerShown: true , title: ''}}
       />
+
+      <Stack.Screen
+        name="AddAddress"
+        component={AddAddressScreen}
+        options={{headerShown: true , title: ''}}
+      />
+
       <Stack.Screen
         name="EditInfo"
         component={EditInfoScreen}

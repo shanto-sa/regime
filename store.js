@@ -8,11 +8,12 @@ import vacationSlice from './slices/vacationSlice';
 import commonDataSlice from './slices/commonDataSlice'; 
 import paymentSlice from './slices/paymentSlice'; 
 import userProfileSlice from './slices/userProfileSlice'; 
+import addressSlice from './slices/addressSlice'; 
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth', 'contact', 'vacation', 'commonData', 'payment','userProfile'], // only auth will be persisted
+  whitelist: ['auth', 'contact', 'vacation', 'commonData', 'payment','userProfile', 'address'], // only auth will be persisted
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
@@ -25,6 +26,7 @@ export const store = configureStore({
     commonData: commonDataSlice,
     payment: paymentSlice,
     userProfile: userProfileSlice,
+    address: addressSlice,
 
     // other reducers...
   },
