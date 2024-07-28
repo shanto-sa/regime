@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; 
+import React, { useEffect, useState } from 'react';
+import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAddresses } from '../../slices/addressSlice'; // Adjust the import path as needed
 
 // Address Card Component
 const AddressCard = ({ address }) => {
@@ -16,10 +18,10 @@ const AddressCard = ({ address }) => {
         <TouchableOpacity onPress={handleCheckboxPress}>
           <View style={[styles.checkbox, isSelected && styles.checkboxSelected]}></View>
         </TouchableOpacity>
-        <Text style={styles.addressType}>المنزل</Text>
+        <Text style={styles.addressType}>{address.type}</Text>
       </View>
       <View style={styles.addressInfo}>
-        <Text style={styles.addressText}>{address}</Text>
+        <Text style={styles.addressText}>{address.address}</Text>
       </View>
       <View style={styles.actions}>
         <TouchableOpacity style={styles.actionButton}>
@@ -37,23 +39,42 @@ const AddressCard = ({ address }) => {
 };
 
 const ListAddress = () => {
-  
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { addresses, loading, error } = useSelector(state => state.address);
+
+  useEffect(() => {
+    dispatch(fetchAddresses());
+  }, [dispatch]);
 
   const handleAddAddressPress = () => {
-    navigation.navigate('AddAddress'); // Navigate to EditProfileScreen
+    navigation.navigate('AddAddress');
   };
+
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ActivityIndicator size="large" color="#006F34" />
+      </SafeAreaView>
+    );
+  }
+
+  if (error) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.errorText}>{error}</Text>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.header}>العناوين</Text>
-          {/* Address Cards */}
-          <AddressCard address="St, Khorais Bldg 4th floor, Jeddah 23526, Saudi Arabia" />
-          <AddressCard address="St, Khorais Bldg 4th floor, Jeddah 23526, Saudi Arabia" />
-          {/* <AddressCard  address="St, Khorais Bldg 4th floor, Jeddah 23526, Saudi Arabia" /> */}
-          {/* New Address Button */}
+          {addresses.map(address => (
+            <AddressCard key={address.id} address={address} />
+          ))}
           <TouchableOpacity style={styles.addButton} onPress={handleAddAddressPress}>
             <Image source={require('../../Image/icon/plus.png')} style={styles.plusIcon} />
             <Text style={styles.addButtonLabel}>إضافة عنوان جديد</Text>
@@ -196,6 +217,11 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontWeight: 'bolder',
     fontSize: 18,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
 
