@@ -14,7 +14,10 @@ import Loader from './Components/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { verifyOTP } from '../slices/authSlice';
 
+
 const ConfirmCodeScreen = ({ navigation }) => {
+
+  const { strings } = useSelector((state) => state.commonData);
 
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
@@ -60,15 +63,15 @@ const ConfirmCodeScreen = ({ navigation }) => {
       
       <View style={styles.mainBody}>
         <Loader loading={loading} />
-      
-
+    
         <View style={styles.cardContainer}>
           <KeyboardAvoidingView enabled>
+
           <Text style={styles.headerText}>
-              تسجيل الدخول إلى حسابك
+          {strings.login_title}
             </Text>
             <Text style={styles.subHeaderText}>
-              رجيم يمنحك الباقات الأنسب لك التي تحتاجها لبناء جسم صحي
+            {strings.login_sub_title}
             </Text>
             <View style={styles.SectionStyle}>
               <TextInput

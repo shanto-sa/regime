@@ -86,7 +86,7 @@ const LoginScreen = ({ navigation }) => {
                 onChangeText={(phoneNumber) =>
                   setPhoneNumber(phoneNumber.replace(/[^0-9]/g, ''))
                 }
-                placeholder="رقم الهاتف"
+                placeholder={strings.phone_number_placeholder}
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
                 keyboardType="numeric"
@@ -103,7 +103,7 @@ const LoginScreen = ({ navigation }) => {
               style={styles.buttonStyle}
               activeOpacity={0.5}
               onPress={handleSubmitPress}>
-              <Text style={styles.buttonTextStyle}>تسجيل الدخول</Text>
+              <Text style={styles.buttonTextStyle}>{strings.login_button_text}</Text>
             </TouchableOpacity>
             <View style={styles.container}>
         {languageOptions.map((item, key) => (
