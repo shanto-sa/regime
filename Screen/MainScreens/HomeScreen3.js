@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, SafeAreaView, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
-
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
-
-import { useSelector } from 'react-redux';
 import { selectUserData } from '../../slices/authSlice';
-
 import { useNavigation } from '@react-navigation/native';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHomeData } from '../../slices/fetchDataSlice';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -18,6 +15,23 @@ const HomeScreen = () => {
   const handlePlanDaysPress = () => {
     navigation.navigate('ChoosePlan');
   };
+
+  const dispatch = useDispatch();
+
+  const { HomeData, loading, error } = useSelector(state => state.home);
+
+  useEffect(() => {
+    dispatch(fetchHomeData());
+  }, [dispatch]);
+
+
+  if (error) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.errorText}>{error}</Text>
+      </SafeAreaView>
+    );
+  }
   
   return (
     <SafeAreaView style={styles.container}>
@@ -25,16 +39,16 @@ const HomeScreen = () => {
 
       <Text>Welcome, {userData?.name || 'User'}!</Text>
 
-
-
       <ScrollView>
       <View style={styles.card}>
+      {HomeData.map(home => (
         <Text style={styles.infoText}>
           أنت الآن مشترك في
-          <Text style={styles.packageText}> الباقة المتكاملة </Text>
-          منذ 30/5/2023 و ستنتهي خلال 26 يومًا في تاريخ
-          <Text style={styles.dateText}> 30/6/2023 </Text>
+          <Text style={styles.packageText}>  {home.subscription.package || 'باقة غير معروفة'}</Text>
+          منذ {home.subscription.startDate || '0'} و ستنتهي خلال 26 يومًا في تاريخ
+          <Text style={styles.dateText}> {home.subscription.endDate || '0'} </Text>
         </Text>
+           ))}
         <Image
           source={require('../../Image/arrow.png')}
           style={styles.arrowIcon}
@@ -42,9 +56,10 @@ const HomeScreen = () => {
         />
       </View>
       {/* Card 1 */}
+      {HomeData.map(home => (
       <View style={styles.row}>
         <View style={styles.subCard}>
-          <Text style={styles.boldText}>24</Text>
+          <Text style={styles.boldText}>{home.stats.meals || '0'}</Text>
           <Text>عدد الوجبات التي استهلكتها</Text>
           <Image
             source={require('../../Image/icon/food.png')}
@@ -54,7 +69,7 @@ const HomeScreen = () => {
         </View>
         {/* Card 2 */}
         <View style={styles.subCard}>
-          <Text style={styles.boldText}>2</Text>
+          <Text style={styles.boldText}>{home.stats.rows || '0'}</Text>
           <Text>عدد الوجبات التي استهلكتها</Text>
           <Image
             source={require('../../Image/icon/row.png')}
@@ -63,10 +78,12 @@ const HomeScreen = () => {
           />
         </View>
       </View>
+        ))}
       {/* Two Cards in Second Row */}
+      {HomeData.map(home => (
       <View style={styles.row}>
         <View style={styles.subCard}>
-          <Text style={styles.boldText}>6</Text>
+          <Text style={styles.boldText}>{home.stats2.meals || '0'}</Text>
           <Text>عدد الوجبات التي استهلكتها</Text>
           <Image
             source={require('../../Image/icon/food2.png')}
@@ -75,7 +92,7 @@ const HomeScreen = () => {
           />
         </View>
         <View style={styles.subCard}>
-          <Text style={styles.boldText}>24</Text>
+          <Text style={styles.boldText}>{home.stats2.rows || '0'}</Text>
           <Text>عدد الوجبات التي استهلكتها</Text>
           <Image
             source={require('../../Image/icon/calender.png')}
@@ -84,6 +101,7 @@ const HomeScreen = () => {
           />
         </View>
       </View>
+       ))}
       <View style={styles.dottedLine} />
 
       <View style={styles.rightContent}>
@@ -282,11 +300,15 @@ const styles = StyleSheet.create({
     fontSize: screenWidth * 0.04,
   },
   card2Image: {
-    width: screenWidth * 0.5,
+    width: screenWidth * 0.4,
     height: screenHeight * 0.2,
-    marginBottom: screenHeight * 0.010,
+    marginBottom: screenHeight * 0.02,
   },
-  
+  errorText: {
+    color: 'red',
+    fontSize: 16,
+    textAlign: 'center',
+  },
   
 });
 
