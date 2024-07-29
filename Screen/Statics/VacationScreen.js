@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { View, Text, SafeAreaView, StyleSheet, ScrollView, TextInput, TouchableOpacity } from 'react-native';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { setStartDate, setEndDate, submitVacation } from '../../slices/vacationSlice';
 
 const VacationScreen = () => {
 
+  const { strings } = useSelector((state) => state.commonData);
   const dispatch = useDispatch();
   const { startDate, endDate, isLoading, error } = useSelector(
     (state) => state.vacation
@@ -24,8 +24,6 @@ const VacationScreen = () => {
       startDate,
       endDate,
     };
-
-    
     dispatch(submitVacation(vacationData));
   };
 
@@ -34,11 +32,10 @@ const VacationScreen = () => {
       <ScrollView>
         <View style={styles.container}>
         <Text style={styles.header}>
-          الشروط والأحكام 
+           {strings.vacation} 
         </Text>
-          {/* First Card */}
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>إضافة تاريخ الإجازة</Text>
+            <Text style={styles.cardTitle}>{strings.add_vacation_date}</Text>
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.dateInput}
@@ -48,10 +45,8 @@ const VacationScreen = () => {
               />
             </View>
           </View>
-
-          {/* Second Card */}
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>إضافة إجازة من تاريخ إلى تاريخ</Text>
+            <Text style={styles.cardTitle}>{strings.add_vacation_from_date_to_date}</Text>
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.dateInput}
@@ -69,10 +64,8 @@ const VacationScreen = () => {
               />
             </View>
           </View>
-
-          {/* Submit Button */}
           <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-            <Text style={styles.submitButtonText}>تأكيد</Text>
+            <Text style={styles.submitButtonText}>{strings.confirm}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -126,7 +119,7 @@ const styles = StyleSheet.create({
     borderColor: '#CCCCCC',
     borderRadius: 5,
     paddingHorizontal: 10,
-    textAlign: 'right', // Align text to the right
+    textAlign: 'right',
   },
   
   submitButton: {
@@ -144,5 +137,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-
 export default VacationScreen;

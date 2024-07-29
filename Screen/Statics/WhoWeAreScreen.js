@@ -1,44 +1,43 @@
 import * as React from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const WhoWeAreScreen = () => {
+
+  const { strings } = useSelector((state) => state.commonData);
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.header}>
-            من نحن
+            {strings.about_us}
           </Text>
           <Image source={require('../../Image/regimelogo.png')} style={styles.image} />
           <View style={styles.yellowLine} />
           <Text style={styles.text}>
-            هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.
+            {strings.about_content}
           </Text>
           <View style={styles.socialContainer}>
             <View style={styles.socialItem}>
-
-              <Text style={styles.socialText}>نمط الحياة</Text>
+              <Text style={styles.socialText}>{strings.facebook}</Text>
               <Image source={require('../../Image/icon/facebook.png')} style={styles.socialIcon} />
             </View>
             <View style={styles.socialItem}>
-             <Text style={styles.socialText}>نمط الحياة</Text>
+             <Text style={styles.socialText}>{strings.instagram}</Text>
               <Image source={require('../../Image/icon/instagram.png')} style={styles.socialIcon} />
-
             </View>
             <View style={styles.socialItem}>
-               <Text style={styles.socialText}>نمط الحياة</Text>
+               <Text style={styles.socialText}>{strings.twitter}</Text>
               <Image source={require('../../Image/icon/twitter.png')} style={styles.socialIcon} />
-
             </View>
             <View style={styles.socialItem}>
             <Text style={styles.socialText}>+966136765068</Text>
               <Image source={require('../../Image/icon/whatsapp.png')} style={styles.socialIcon} />
-
             </View>
             <View style={styles.socialItem}>
-             <Text style={styles.socialText}>نمط الحياة</Text>
+             <Text style={styles.socialText}>{strings.google}</Text>
               <Image source={require('../../Image/icon/google.png')} style={styles.socialIcon} />
-
             </View>
           </View>
         </View>
@@ -98,9 +97,9 @@ const styles = StyleSheet.create({
   },
   socialText: {
     fontSize: 14,
-    textAlign: 'right', // Adjusted to 'left'
+    textAlign: 'right',
     color: '#000000',
-    marginLeft: 100, // Adjusted to add some space between icon and text
+    marginLeft: 100,
   },
 });
 

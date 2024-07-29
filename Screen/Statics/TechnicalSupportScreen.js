@@ -1,19 +1,23 @@
 import * as React from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
+import { useSelector } from 'react-redux';
 
 const TechnicalSupportScreen = () => {
+
+  const { strings } = useSelector((state) => state.commonData);
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.header}>
-            الدعم الفني
+             {strings.technical_support_title}
           </Text>
           <View style={styles.card}>
-            <Text style={styles.cardText}>فريق الدعم الفني</Text>
-            <Text style={styles.cardText2}>اسألنا ما تريد، أو أرسل الفيدباك</Text>
+            <Text style={styles.cardText}>{strings.technical_support_team}</Text>
+            <Text style={styles.cardText2}>{strings.send_deadback}</Text>
             <Image source={require('../../Image/regimelogo.png')} style={styles.image} />
-            <Text style={styles.responseText}>عادة ما يتم الرد خلال ساعة</Text>
+            <Text style={styles.responseText}>{strings.response_time}</Text>
           </View>
         </View>
       </ScrollView>
