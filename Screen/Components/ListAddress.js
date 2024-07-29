@@ -7,6 +7,7 @@ import { fetchAddresses } from '../../slices/addressSlice'; // Adjust the import
 // Address Card Component
 const AddressCard = ({ address }) => {
   const [isSelected, setIsSelected] = useState(false);
+  const { strings } = useSelector((state) => state.commonData);
 
   const handleCheckboxPress = () => {
     setIsSelected(!isSelected);
@@ -31,7 +32,7 @@ const AddressCard = ({ address }) => {
           <Image source={require('../../Image/icon/edit.png')} style={styles.actionIcon} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.assignButton}>
-          <Text style={styles.assignButtonText}>تعيين</Text>
+          <Text style={styles.assignButtonText}>{strings.addresse}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -42,6 +43,7 @@ const ListAddress = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { addresses, loading, error } = useSelector(state => state.address);
+  const { strings } = useSelector((state) => state.commonData);
 
   useEffect(() => {
     dispatch(fetchAddresses());
@@ -71,13 +73,13 @@ const ListAddress = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.header}>العناوين</Text>
+          <Text style={styles.header}>{strings.addresses}</Text>
           {addresses.map(address => (
             <AddressCard key={address.id} address={address} />
           ))}
           <TouchableOpacity style={styles.addButton} onPress={handleAddAddressPress}>
             <Image source={require('../../Image/icon/plus.png')} style={styles.plusIcon} />
-            <Text style={styles.addButtonLabel}>إضافة عنوان جديد</Text>
+            <Text style={styles.addButtonLabel}>{strings.add_new_address}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
