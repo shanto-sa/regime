@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 const PlanDetailsScreen = () => {
   const navigation = useNavigation();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const { strings } = useSelector((state) => state.commonData);
 
   const handleSingleIndexSelect = index => {
     setSelectedIndex(index);
@@ -23,17 +25,18 @@ const PlanDetailsScreen = () => {
 
   const tabContents = [
     [
-      { image: require('../../Image/plancard.png'), text: 'كب كيك بالفواكة\n المجففة' },
-      { image: require('../../Image/plancard.png'), text: 'كب كيك بالفواكة\n المجففة' },
-      { image: require('../../Image/plancard.png'), text: 'كب كيك بالفواكة\n المجففة' },
-      { image: require('../../Image/plancard.png'), text: 'كب كيك بالفواكة \nالمجففة' },
-      { image: require('../../Image/plancard.png'), text: 'كب كيك بالفواكة \nالمجففة' },
-      { image: require('../../Image/plancard.png'), text: 'كب كيك بالفواكة \nالمجففة' },
+      { image: require('../../Image/plancard.png'), text: strings.p_content },
+      { image: require('../../Image/plancard.png'), text: strings.p_content },
+      { image: require('../../Image/plancard.png'), text: strings.p_content },
+      { image: require('../../Image/plancard.png'), text: strings.p_content },
+      { image: require('../../Image/plancard.png'), text: strings.p_content },
+      { image: require('../../Image/plancard.png'), text: strings.p_content },
+
    
     ],
     [
-      { image: require('../../Image/plancard.png'), text: 'كب كيك بالفواكة \nالمجففة' },
-      { image: require('../../Image/plancard.png'), text: 'كب كيك بالفواكة \nالمجففة' },
+      { image: require('../../Image/plancard.png'), text: strings.p_content },
+      { image: require('../../Image/plancard.png'), text: strings.p_content },
     ], // For Sunday
     [], // For Monday
     [], // For Tuesday
@@ -59,7 +62,7 @@ const PlanDetailsScreen = () => {
       );
     } else {
       return (
-        <Text style={styles.noContentText}>No content found for this tab</Text>
+        <Text style={styles.noContentText}>{strings.not_found_content_in_tab}</Text>
       );
     }
   };
@@ -67,11 +70,11 @@ const PlanDetailsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <Text style={styles.headerText}>المنيو</Text>
+        <Text style={styles.headerText}>{strings.menu_header}</Text>
         <View style={styles.tabContainer}>
           {/* Segmented Control with Custom Styling */}
           <SegmentedControlTab
-            values={['سبت', 'احد', 'اثنين', 'ثلاثاء', 'اربعاء', 'خميس']}
+            values={[strings.saturday, strings.sunday, strings.monday, strings.tuesday, strings.wednesday, strings.thursday]}
             selectedIndex={selectedIndex}
             onTabPress={handleSingleIndexSelect}
             borderRadius={0}
@@ -99,9 +102,14 @@ const PlanDetailsScreen = () => {
             {renderTabContent()}
           </View>
           <View style={styles.bottomContainer}>
-            <Text style={styles.planHeaderText}>خطتك</Text>
+            <Text style={styles.planHeaderText}>{strings.plan_header}</Text>
             <View style={styles.planButtonsContainer}>
-              {[{text: '١٤ يوم'}, {text: '٢٨ يوم'}, {text: 'يوم'}, {text: '٧ ايام'}].map((plan, index) => (
+              {[
+                { text: strings.plan_14_days },
+                { text: strings.plan_28_days },
+                { text: strings.plan_30_days },
+                { text: strings.plan_7_days }
+              ].map((plan, index) => (
                 <TouchableOpacity 
                   key={index} 
                   style={[styles.planButton, selectedPlan === plan.text && styles.selectedPlanButton]} 
@@ -112,7 +120,7 @@ const PlanDetailsScreen = () => {
               ))}
             </View>
             <TouchableOpacity style={styles.submitButton} onPress={handlePlanDaysPress}>
-              <Text style={styles.submitButtonText}>التالي</Text>
+              <Text style={styles.submitButtonText}>{strings.next_button}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -130,7 +138,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   headerText: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
     alignSelf: 'flex-end', // Align text to the right
@@ -179,7 +187,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   planHeaderText: {
-    fontSize: 22,
+    fontSize: 18,
     marginBottom: 10,
     alignSelf: 'flex-end', // Align text to the right
     fontWeight:'bold',
