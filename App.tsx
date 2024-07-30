@@ -29,7 +29,7 @@ import ChoosePlanScreen from './Screen/Subscription/ChoosePlanScreen';
 import PlanDetailsScreen from './Screen/Subscription/PlanDetailsScreen';
 import PlanDaysScreen from './Screen/Subscription/PlanDaysScreen';
 import PayNowScreen from './Screen/Subscription/PayNowScreen';
-import AddMealScreen from './Screen/AddMealScreen';
+
 
 // Imported Static Screens
 import LanguageSwithScreen from './Screen/Statics/LanguageSwithScreen';
@@ -212,21 +212,7 @@ function HomeStack() {
         title: 'اختيار الايام', // Title without leading spaces
       }}
       />
-
-      <Stack.Screen 
-      name="AddMeal"
-      component={AddMealScreen}
-      options={{
-        headerShown: true,
-        headerTitleAlign: 'center', // Align title in the center
-        headerTitleStyle: {
-          fontSize: 20, // Adjust text size as needed
-          fontWeight: 'bold', // Make text bold
-        },
-        title: 'إختيار الوجبات', // Title without leading spaces
-      }}
-      />
-
+      
       <Stack.Screen 
       name="PayNow"
       component={PayNowScreen}

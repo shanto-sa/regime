@@ -43,12 +43,14 @@ const HomeScreen = () => {
       <ScrollView>
       <View style={styles.card}>
       {HomeData.map(home => (
+        <View key={home.id}>
         <Text style={styles.infoText}>
           {strings.htext1}
           <Text style={styles.packageText}>  {home.subscription.package || 'باقة غير معروفة'}</Text>
           {strings.htext2} {home.subscription.startDate || '0'} {strings.htext3}
           <Text style={styles.dateText}> {home.subscription.endDate || '0'} </Text>
         </Text>
+        </View>
            ))}
         <Image
           source={require('../../Image/arrow.png')}
@@ -58,7 +60,7 @@ const HomeScreen = () => {
       </View>
       {/* Card 1 */}
       {HomeData.map(home => (
-      <View style={styles.row}>
+      <View key={home.id} style={styles.row}>
         <View style={styles.subCard}>
           <Text style={styles.boldText}>{home.stats.meals || '0'}</Text>
           <Text>{strings.number_of_meals}</Text>
@@ -82,7 +84,7 @@ const HomeScreen = () => {
         ))}
       {/* Two Cards in Second Row */}
       {HomeData.map(home => (
-      <View style={styles.row}>
+      <View key={home.id} style={styles.row}>
         <View style={styles.subCard}>
           <Text style={styles.boldText}>{home.stats2.meals || '0'}</Text>
           <Text>{strings.number_of_meals}</Text>
