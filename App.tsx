@@ -176,12 +176,12 @@ function HomeStack() {
       component={ChoosePlanScreen}
       options={{
         headerShown: true,
-        headerTitleAlign: 'center', // Align title in the center
+        headerTitleAlign: 'center',
         headerTitleStyle: {
-          fontSize: 20, // Adjust text size as needed
-          fontWeight: 'bold', // Make text bold
+          fontSize: 20,
+          fontWeight: 'bold',
         },
-        title: 'ختيار الباقة', // Title without leading spaces
+        title: 'ختيار الباقة',
       }}
       />
 
@@ -190,12 +190,12 @@ function HomeStack() {
       component={PlanDetailsScreen}
       options={{
         headerShown: true,
-        headerTitleAlign: 'center', // Align title in the center
+        headerTitleAlign: 'center',
         headerTitleStyle: {
-          fontSize: 20, // Adjust text size as needed
-          fontWeight: 'bold', // Make text bold
+          fontSize: 20,
+          fontWeight: 'bold',
         },
-        title: 'الكيتو', // Title without leading spaces
+        title: 'الكيتو',
       }}
       />
 
@@ -204,12 +204,12 @@ function HomeStack() {
       component={PlanDaysScreen}
       options={{
         headerShown: true,
-        headerTitleAlign: 'center', // Align title in the center
+        headerTitleAlign: 'center',
         headerTitleStyle: {
-          fontSize: 20, // Adjust text size as needed
-          fontWeight: 'bold', // Make text bold
+          fontSize: 20,
+          fontWeight: 'bold',
         },
-        title: 'اختيار الايام', // Title without leading spaces
+        title: 'اختيار الايام',
       }}
       />
       
@@ -218,12 +218,12 @@ function HomeStack() {
       component={PayNowScreen}
       options={{
         headerShown: true,
-        headerTitleAlign: 'center', // Align title in the center
+        headerTitleAlign: 'center',
         headerTitleStyle: {
-          fontSize: 20, // Adjust text size as needed
-          fontWeight: 'bold', // Make text bold
+          fontSize: 20, 
+          fontWeight: 'bold',
         },
-        title: 'إتمام الطلب', // Title without leading spaces
+        title: 'إتمام الطلب',
       }}
       />
 
@@ -236,18 +236,18 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarShowLabel: false, // Hide tab labels
+        tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: '#FFFFFF', // Background color of the tab bar
-          borderRadius: 18, // Total border radius
-          height: 60, // Increase tab bar height
-          elevation: 10, // Shadow elevation
-          shadowColor: '#067737', // Shadow color
-          shadowOpacity: 0.4, // Shadow opacity
-          shadowOffset: { width: 0, height: -3 }, // Shadow offset
-          shadowRadius: 4, // Shadow radius
-          marginVertical: 10, // Add vertical margin of 10
-          marginHorizontal: 10, // Add horizontal margin of 10
+          backgroundColor: '#FFFFFF',
+          borderRadius: 18,
+          height: 60,
+          elevation: 10,
+          shadowColor: '#067737',
+          shadowOpacity: 0.4,
+          shadowOffset: { width: 0, height: -3 },
+          shadowRadius: 4,
+          marginVertical: 10,
+          marginHorizontal: 10,
         },
       }}>
       <Tab.Screen
@@ -302,7 +302,6 @@ const BottomTabNavigator = () => {
 
 const AuthStack = createStackNavigator();
 
-// Stack Navigator for Login and Sign up Screen
 const AuthStackScreen = () => {
   return (
     <AuthStack.Navigator initialRouteName="LoginScreen">
@@ -354,13 +353,13 @@ const AuthStackScreen = () => {
         name="RegisterScreen"
         component={RegisterScreen}
         options={{
-          title: 'Register', // Set Header Title
+          title: 'Register',
           headerStyle: {
-            backgroundColor: '#307ecc', // Set Header color
+            backgroundColor: '#307ecc',
           },
-          headerTintColor: '#fff', // Set Header text color
+          headerTintColor: '#fff',
           headerTitleStyle: {
-            fontWeight: 'bold', // Set Header text style
+            fontWeight: 'bold',
           },
         }}
       />
@@ -384,10 +383,8 @@ const RootNavigation = () => {
 
   // const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
-
   console.log('shanto', isAuthenticated);
 
- 
   return (
     <NavigationContainer>
       {/* <Stack.Navigator initialRouteName="SplashScreen"> */}
@@ -397,18 +394,15 @@ const RootNavigation = () => {
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
-          // Hiding header for Splash Screen
           options={{ headerShown: false }}
         />
-        {/* Auth Navigator: Include Login and Signup */}
-       
+
         <Stack.Screen
               name="Auth"
               component={isAuthenticated ? BottomTabNavigator : AuthStackScreen}
               options={{ headerShown: false }}
             />
 
-        {/* Navigation for Home and Settings screens */}
         <Stack.Screen
           name="MainApp"
           component={BottomTabNavigator}

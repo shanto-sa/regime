@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 
-import Loader from './Components/Loader';
-
-const HWScreen = ({ navigation }) => {
-  const [age, setAge] = useState(20); // Default age
-  const [loading, setLoading] = useState(false);
+const HWScreen = ({navigation}) => {
+  const [age, setAge] = useState(20);
+  const [setLoading] = useState(false);
 
   const handleSubmitPress = () => {
     setLoading(true);
-    // Simulating login by checking against static credentials
-    // Here you can add your logic to handle the submission
     setLoading(false);
     navigation.navigate('Goal');
   };
@@ -32,14 +28,17 @@ const HWScreen = ({ navigation }) => {
       <View style={styles.overlay} />
 
       <TouchableOpacity style={styles.topRightArrowContainer}>
-        <Image source={require('../Image/arrow2.png')} style={styles.topRightArrow} />
+        <Image
+          source={require('../Image/arrow2.png')}
+          style={styles.topRightArrow}
+        />
       </TouchableOpacity>
 
       <View style={styles.mainBody}>
         <Text style={styles.title}>كم عمرك؟</Text>
-        <Text style={styles.subtitle}>للحصول على تجربة أفضل، نحن نحتاج لمعرفة عمرك</Text>
-
-        {/* Age Picker */}
+        <Text style={styles.subtitle}>
+          للحصول على تجربة أفضل، نحن نحتاج لمعرفة عمرك
+        </Text>
         <View style={styles.agePicker}>
           <TouchableOpacity style={styles.arrowButton} onPress={decreaseAge}>
             <Text style={styles.arrowButtonText}>-</Text>
@@ -50,8 +49,13 @@ const HWScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.bottomArrow} onPress={handleSubmitPress}>
-          <Image source={require('../Image/arrowright.png')} style={styles.bottomArrowImage} />
+        <TouchableOpacity
+          style={styles.bottomArrow}
+          onPress={handleSubmitPress}>
+          <Image
+            source={require('../Image/arrowright.png')}
+            style={styles.bottomArrowImage}
+          />
         </TouchableOpacity>
       </View>
     </View>

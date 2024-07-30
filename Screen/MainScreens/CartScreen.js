@@ -1,5 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, SafeAreaView, TextInput, ScrollView, TouchableOpacity, StyleSheet, Dimensions, Image, FlatList } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  Image,
+  FlatList,
+} from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -7,14 +18,16 @@ const screenHeight = Dimensions.get('window').height;
 const CartScreen = () => {
   const [selectedCard, setSelectedCard] = useState(null);
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <View style={styles.card}>
-      <View style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View style={{flexDirection: 'column', alignItems: 'flex-end'}}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Text>السبت</Text>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#000000', }}>258</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={{fontSize: 16, fontWeight: 'bold', color: '#000000'}}>
+            258
+          </Text>
         </View>
       </View>
     </View>
@@ -22,22 +35,25 @@ const CartScreen = () => {
 
   const renderCard = (icon, text, index) => (
     <TouchableOpacity
-      style={[styles.card2, selectedCard === index && { backgroundColor: '#2CA545' }]}
-      onPress={() => handleCardPress(index)}
-    >
+      style={[
+        styles.card2,
+        selectedCard === index && {backgroundColor: '#2CA545'},
+      ]}
+      onPress={() => handleCardPress(index)}>
       <Image source={icon} style={styles.cardIcon} />
-      <Text style={[styles.cardText, selectedCard === index && { color: '#ffffff' }]}>{text}</Text>
+      <Text
+        style={[styles.cardText, selectedCard === index && {color: '#ffffff'}]}>
+        {text}
+      </Text>
     </TouchableOpacity>
   );
 
-  const handleCardPress = (index) => {
-    // Toggle the selected card
+  const handleCardPress = index => {
     setSelectedCard(selectedCard === index ? null : index);
   };
 
-  // Generating example data for FlatList
-  const flatListData = Array.from({ length: 8 }, (_, index) => {
-    return index === `28/${5 + index}`
+  const flatListData = Array.from({length: 8}, (_, index) => {
+    return index === `28/${5 + index}`;
   });
 
   const renderMealCard = (image, calories, saladTitle, mealTitle) => (
@@ -55,62 +71,107 @@ const CartScreen = () => {
       </View>
     </View>
   );
-  
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
-        <View style={{ flex: 1, padding: 16 }}>
-          <Text style={{ fontSize: 24, textAlign: 'center', fontWeight: 'bold', color: '#000000', marginBottom: 16 }}>
+        <View style={{flex: 1, padding: 16}}>
+          <Text
+            style={{
+              fontSize: 24,
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: '#000000',
+              marginBottom: 16,
+            }}>
             إختيار الوجبات
           </Text>
 
-          <View style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
-    <Text style={{ fontSize: 20, color: '#2CA545', marginBottom: 8 }}>الخطة المتكاملة</Text>
-    <TextInput
-      style={{ borderWidth: 1, borderColor: '#ccc', padding: 10, marginBottom: 16 }}
-      placeholder="28/5 - 27/6"
-    />
-  </View>
+          <View style={{flexDirection: 'column', alignItems: 'flex-end'}}>
+            <Text style={{fontSize: 20, color: '#2CA545', marginBottom: 8}}>
+              الخطة المتكاملة
+            </Text>
+            <TextInput
+              style={{
+                borderWidth: 1,
+                borderColor: '#ccc',
+                padding: 10,
+                marginBottom: 16,
+              }}
+              placeholder="28/5 - 27/6"
+            />
+          </View>
 
-          {/* Section 1: Your existing FlatList */}
           <FlatList
             data={flatListData}
             renderItem={renderItem}
             keyExtractor={(item, index) => index.toString()}
             horizontal
             showsHorizontalScrollIndicator={false}
-            style={{ marginBottom: 16 }}
+            style={{marginBottom: 16}}
           />
-
-          {/* Section 2: New scrollable cards */}
-          <View style={{ marginBottom: 16 }}>
-            <Text style={{ fontSize: 20, color: '#000000', marginBottom: 8, fontWeight: 'bold', marginRight: 10, }}> الأقسام</Text>
+          
+          <View style={{marginBottom: 16}}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: '#000000',
+                marginBottom: 8,
+                fontWeight: 'bold',
+                marginRight: 10,
+              }}>
+              {' '}
+              الأقسام
+            </Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {/* Example cards */}
               {renderCard(require('../../Image/meal/r2.png'), 'الافطار', 0)}
               {renderCard(require('../../Image/meal/r3.png'), 'الغذاء', 1)}
               {renderCard(require('../../Image/meal/r4.png'), 'العشاء', 2)}
               {renderCard(require('../../Image/meal/r3.png'), 'الافطار', 3)}
-              {/* Add more cards as needed */}
             </ScrollView>
           </View>
+          <View style={{marginBottom: 16}}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: '#000000',
+                marginBottom: 8,
+                fontWeight: 'bold',
+                marginRight: 16,
+              }}>
+              قائمة اليوم
+            </Text>
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              {renderMealCard(
+                require('../../Image/meal/order1.png'),
+                '10',
+                'سلطة كول سلو',
+                '..... Slow Cole Slow',
+              )}
+              {renderMealCard(
+                require('../../Image/meal/order2.png'),
+                '12',
+                'سلطة كول سلو',
+                '..... Slow Cole Slow',
+              )}
+            </View>
 
-          {/* Section 3: Additional Section */}
-          <View style={{ marginBottom: 16 }}>
-            <Text style={{ fontSize: 20, color: '#000000', marginBottom: 8, fontWeight: 'bold', marginRight: 16, }}>قائمة اليوم</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-
-  {renderMealCard(require('../../Image/meal/order1.png'), '10', 'سلطة كول سلو', '..... Slow Cole Slow')}
-  {renderMealCard(require('../../Image/meal/order2.png'), '12', 'سلطة كول سلو', '..... Slow Cole Slow')}
-</View>
-
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-  {renderMealCard(require('../../Image/meal/order3.png'), '10', 'سلطة كول سلو', '..... Slow Cole Slow')}
-  {renderMealCard(require('../../Image/meal/order4.png'), '12', 'سلطة كول سلو', '..... Slow Cole Slow')}
-</View>
-
-
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              {renderMealCard(
+                require('../../Image/meal/order3.png'),
+                '10',
+                'سلطة كول سلو',
+                '..... Slow Cole Slow',
+              )}
+              {renderMealCard(
+                require('../../Image/meal/order4.png'),
+                '12',
+                'سلطة كول سلو',
+                '..... Slow Cole Slow',
+              )}
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -149,7 +210,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#000000',
-    marginTop: 8, // Adjust as needed
+    marginTop: 8,
   },
 
   mealCard: {
@@ -165,9 +226,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#000000',
     marginBottom: 10,
-    textAlign:'right'
+    textAlign: 'right',
   },
-  
 
   mealImage: {
     width: '100%',
@@ -220,7 +280,7 @@ const styles = StyleSheet.create({
   },
 
   scrollViewContainer: {
-    paddingBottom: screenHeight * 0.1, // Adjust as needed
+    paddingBottom: screenHeight * 0.1,
   },
 });
 

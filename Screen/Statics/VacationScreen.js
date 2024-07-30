@@ -1,21 +1,32 @@
 import * as React from 'react';
-import { View, Text, SafeAreaView, StyleSheet, ScrollView, TextInput, TouchableOpacity } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setStartDate, setEndDate, submitVacation } from '../../slices/vacationSlice';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  setStartDate,
+  setEndDate,
+  submitVacation,
+} from '../../slices/vacationSlice';
 
 const VacationScreen = () => {
-
-  const { strings } = useSelector((state) => state.commonData);
+  const {strings} = useSelector(state => state.commonData);
   const dispatch = useDispatch();
-  const { startDate, endDate, isLoading, error } = useSelector(
-    (state) => state.vacation
+  const {startDate, endDate,} = useSelector(
+    state => state.vacation,
   );
 
-  const handleStartDateChange = (date) => {
+  const handleStartDateChange = date => {
     dispatch(setStartDate(date));
   };
 
-  const handleEndDateChange = (date) => {
+  const handleEndDateChange = date => {
     dispatch(setEndDate(date));
   };
 
@@ -28,12 +39,10 @@ const VacationScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <ScrollView>
         <View style={styles.container}>
-        <Text style={styles.header}>
-           {strings.vacation} 
-        </Text>
+          <Text style={styles.header}>{strings.vacation}</Text>
           <View style={styles.card}>
             <Text style={styles.cardTitle}>{strings.add_vacation_date}</Text>
             <View style={styles.inputContainer}>
@@ -46,7 +55,9 @@ const VacationScreen = () => {
             </View>
           </View>
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>{strings.add_vacation_from_date_to_date}</Text>
+            <Text style={styles.cardTitle}>
+              {strings.add_vacation_from_date_to_date}
+            </Text>
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.dateInput}
@@ -100,11 +111,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5, 
+    elevation: 5,
   },
   cardTitle: {
     fontSize: 18,
-    color:'#000000',
+    color: '#000000',
     fontWeight: 'bold',
     marginBottom: 15,
   },
@@ -121,7 +132,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     textAlign: 'right',
   },
-  
+
   submitButton: {
     backgroundColor: '#006F34',
     borderRadius: 5,

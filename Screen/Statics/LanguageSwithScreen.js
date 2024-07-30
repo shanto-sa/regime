@@ -1,22 +1,29 @@
-import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLanguage } from '../../slices/commonDataSlice';
+import React, {useEffect} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLanguage} from '../../slices/commonDataSlice';
 
 const languageOptions = [
-  { shortform: 'en', longform: 'English' },
-  { shortform: 'ar', longform: 'العربية' },
+  {shortform: 'en', longform: 'English'},
+  {shortform: 'ar', longform: 'العربية'},
 ];
 
 const LanguageSwitchScreen = () => {
   const dispatch = useDispatch();
-  const { language, strings } = useSelector((state) => state.commonData);
+  const {language, strings} = useSelector(state => state.commonData);
 
   useEffect(() => {
     console.log('Language state:', language);
   }, [language]);
 
-  const handleLanguageChange = (shortform) => {
+  const handleLanguageChange = shortform => {
     console.log('handleLanguageChange called with:', shortform);
     dispatch(setLanguage(shortform));
   };
@@ -32,17 +39,19 @@ const LanguageSwitchScreen = () => {
           <TouchableOpacity
             style={[
               styles.languageButton,
-              item.shortform === language ? styles.selectedLanguageButton : null,
+              item.shortform === language
+                ? styles.selectedLanguageButton
+                : null,
             ]}
             key={key}
-            onPress={() => handleLanguageChange(item.shortform)}
-          >
+            onPress={() => handleLanguageChange(item.shortform)}>
             <Text
               style={[
                 styles.languageText,
-                item.shortform === language ? styles.selectedLanguageText : null,
-              ]}
-            >
+                item.shortform === language
+                  ? styles.selectedLanguageText
+                  : null,
+              ]}>
               {item.longform}
             </Text>
           </TouchableOpacity>

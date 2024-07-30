@@ -1,7 +1,14 @@
-import React, { useEffect, useRef } from 'react';
-import { Animated, View, StyleSheet, Image, Text, Dimensions } from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {
+  Animated,
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  Dimensions,
+} from 'react-native';
 
-const SplashScreen = ({ navigation }) => {
+const SplashScreen = ({navigation}) => {
   const titleAnims = useRef([
     new Animated.Value(0),
     new Animated.Value(0),
@@ -12,21 +19,19 @@ const SplashScreen = ({ navigation }) => {
   ]).current;
 
   useEffect(() => {
-    // Animation sequence
     setTimeout(() => {
       titleAnims.forEach((anim, index) => {
         setTimeout(() => {
           animateLetter(anim);
-        }, index * 200); // Delay each letter by 200 milliseconds
+        }, index * 200);
       });
-      // Navigate to Auth screen after animation completes
       setTimeout(() => {
         navigation.replace('Auth');
       }, 1200);
-    }, 2000); // Delay for 2 seconds before starting animation
+    }, 2000);
   }, []);
 
-  const animateLetter = (anim) => {
+  const animateLetter = anim => {
     Animated.timing(anim, {
       toValue: 1,
       duration: 300,
@@ -42,12 +47,24 @@ const SplashScreen = ({ navigation }) => {
       />
       <View style={styles.content}>
         <View style={styles.titleContainer}>
-          <Animated.Text style={[styles.letter, { opacity: titleAnims[0] }]}>R</Animated.Text>
-          <Animated.Text style={[styles.letter, { opacity: titleAnims[1] }]}>e</Animated.Text>
-          <Animated.Text style={[styles.letter, { opacity: titleAnims[2] }]}>g</Animated.Text>
-          <Animated.Text style={[styles.letter, { opacity: titleAnims[3] }]}>i</Animated.Text>
-          <Animated.Text style={[styles.letter, { opacity: titleAnims[4] }]}>m</Animated.Text>
-          <Animated.Text style={[styles.letter, { opacity: titleAnims[5] }]}>e</Animated.Text>
+          <Animated.Text style={[styles.letter, {opacity: titleAnims[0]}]}>
+            R
+          </Animated.Text>
+          <Animated.Text style={[styles.letter, {opacity: titleAnims[1]}]}>
+            e
+          </Animated.Text>
+          <Animated.Text style={[styles.letter, {opacity: titleAnims[2]}]}>
+            g
+          </Animated.Text>
+          <Animated.Text style={[styles.letter, {opacity: titleAnims[3]}]}>
+            i
+          </Animated.Text>
+          <Animated.Text style={[styles.letter, {opacity: titleAnims[4]}]}>
+            m
+          </Animated.Text>
+          <Animated.Text style={[styles.letter, {opacity: titleAnims[5]}]}>
+            e
+          </Animated.Text>
         </View>
       </View>
     </View>
@@ -64,8 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  backgroundColor: 'rgba(239, 249, 240, 0.96)', // Adjusted color code
-
+    backgroundColor: 'rgba(239, 249, 240, 0.96)',
   },
   content: {
     position: 'absolute',
@@ -76,11 +92,11 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     width: '100%',
-    height: '30%', // Adjust to set the height of the curved background
+    height: '30%',
     position: 'absolute',
     top: 0,
-    borderBottomLeftRadius: windowWidth / 2, // Adjust to set the curvature
-    borderBottomRightRadius: windowWidth / 2, // Adjust to set the curvature
+    borderBottomLeftRadius: windowWidth / 2,
+    borderBottomRightRadius: windowWidth / 2,
   },
   titleContainer: {
     flexDirection: 'row',

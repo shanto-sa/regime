@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAddresses } from '../../slices/addressSlice'; // Adjust the import path as needed
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchAddresses} from '../../slices/addressSlice';
 
-// Address Card Component
-const AddressCard = ({ address }) => {
+const AddressCard = ({address}) => {
   const [isSelected, setIsSelected] = useState(false);
-  const { strings } = useSelector((state) => state.commonData);
+  const {strings} = useSelector(state => state.commonData);
 
   const handleCheckboxPress = () => {
     setIsSelected(!isSelected);
@@ -17,7 +25,11 @@ const AddressCard = ({ address }) => {
     <View style={styles.addressCard}>
       <View style={styles.topRow}>
         <TouchableOpacity onPress={handleCheckboxPress}>
-          <View style={[styles.checkbox, isSelected && styles.checkboxSelected]}></View>
+          <View
+            style={[
+              styles.checkbox,
+              isSelected && styles.checkboxSelected,
+            ]}></View>
         </TouchableOpacity>
         <Text style={styles.addressType}>{address.type}</Text>
       </View>
@@ -26,10 +38,16 @@ const AddressCard = ({ address }) => {
       </View>
       <View style={styles.actions}>
         <TouchableOpacity style={styles.actionButton}>
-          <Image source={require('../../Image/icon/delete.png')} style={styles.actionIcon} />
+          <Image
+            source={require('../../Image/icon/delete.png')}
+            style={styles.actionIcon}
+          />
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionButton}>
-          <Image source={require('../../Image/icon/edit.png')} style={styles.actionIcon} />
+          <Image
+            source={require('../../Image/icon/edit.png')}
+            style={styles.actionIcon}
+          />
         </TouchableOpacity>
         <TouchableOpacity style={styles.assignButton}>
           <Text style={styles.assignButtonText}>{strings.addresse}</Text>
@@ -42,8 +60,8 @@ const AddressCard = ({ address }) => {
 const ListAddress = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { addresses, loading, error } = useSelector(state => state.address);
-  const { strings } = useSelector((state) => state.commonData);
+  const {addresses, loading, error} = useSelector(state => state.address);
+  const {strings} = useSelector(state => state.commonData);
 
   useEffect(() => {
     dispatch(fetchAddresses());
@@ -70,15 +88,20 @@ const ListAddress = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.header}>{strings.addresses}</Text>
           {addresses.map(address => (
             <AddressCard key={address.id} address={address} />
           ))}
-          <TouchableOpacity style={styles.addButton} onPress={handleAddAddressPress}>
-            <Image source={require('../../Image/icon/plus.png')} style={styles.plusIcon} />
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={handleAddAddressPress}>
+            <Image
+              source={require('../../Image/icon/plus.png')}
+              style={styles.plusIcon}
+            />
             <Text style={styles.addButtonLabel}>{strings.add_new_address}</Text>
           </TouchableOpacity>
         </View>
@@ -106,16 +129,15 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 20,
     width: '100%',
-    shadowColor: '#006F34', // Green shadow color
+    shadowColor: '#006F34',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.5, // Adjust opacity as needed
-    shadowRadius: 5, // Adjust radius as needed
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
     elevation: 10,
   },
-  
   topRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -134,7 +156,7 @@ const styles = StyleSheet.create({
   },
   addressType: {
     fontSize: 24,
-    color:'#000000',
+    color: '#000000',
     fontWeight: 'bold',
   },
   addressInfo: {
@@ -142,8 +164,8 @@ const styles = StyleSheet.create({
   },
   addressText: {
     fontSize: 12,
-    color:'#000000',
-    padding:10,
+    color: '#000000',
+    padding: 10,
   },
   actions: {
     flexDirection: 'row',
@@ -152,10 +174,10 @@ const styles = StyleSheet.create({
   actionButton: {
     backgroundColor: '#ffffff',
     borderRadius: 15,
-    padding: 10, // Increased padding
-    width: 60, // Increased width
-    justifyContent: 'center', // Center content horizontally
-    alignItems: 'center', // Center content vertically
+    padding: 10,
+    width: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginRight: 10,
     shadowColor: '#000',
     shadowOffset: {
@@ -183,7 +205,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    // marginLeft: 'auto', 
   },
   assignButtonText: {
     color: '#3D9D1C',
@@ -196,7 +217,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#ffffff',
     borderRadius: 10,
-    width:'100%',
+    width: '100%',
     paddingVertical: 15,
     paddingHorizontal: 20,
     marginTop: 20,
@@ -213,7 +234,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     marginRight: 10,
-    marginRight: 'auto', 
+    marginRight: 'auto',
   },
   addButtonLabel: {
     color: '#000000',

@@ -1,18 +1,26 @@
-import React, { useState } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 
 const PlanDaysScreen = () => {
   const navigation = useNavigation();
   const [selectedDays, setSelectedDays] = useState([]);
-  const { strings } = useSelector((state) => state.commonData);
+  const {strings} = useSelector(state => state.commonData);
 
   const handlePlanDaysPress = () => {
     navigation.navigate('PayNow');
   };
 
-  const toggleDaySelection = (day) => {
+  const toggleDaySelection = day => {
     setSelectedDays(prevSelectedDays => {
       if (prevSelectedDays.includes(day)) {
         return prevSelectedDays.filter(selectedDay => selectedDay !== day);
@@ -23,9 +31,10 @@ const PlanDaysScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={{ flex: 1, paddingHorizontal: 16 , backgroundColor:'#FFFFFF'}}>
+    <SafeAreaView style={{flex: 1}}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <View
+          style={{flex: 1, paddingHorizontal: 16, backgroundColor: '#FFFFFF'}}>
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>{strings.start_day_title}</Text>
             <TextInput
@@ -35,31 +44,48 @@ const PlanDaysScreen = () => {
             />
           </View>
           <View style={styles.section}>
-          <Text style={styles.sectionTitle}>{strings.selected_days_title}</Text>
+            <Text style={styles.sectionTitle}>
+              {strings.selected_days_title}
+            </Text>
             <View style={styles.buttonsContainer}>
-              {[strings.friday, strings.saturday, strings.sunday, strings.monday, strings.tuesday, strings.wednesday, strings.thursday].map(day => (
+              {[
+                strings.friday,
+                strings.saturday,
+                strings.sunday,
+                strings.monday,
+                strings.tuesday,
+                strings.wednesday,
+                strings.thursday,
+              ].map(day => (
                 <TouchableOpacity
                   key={day}
                   style={[
                     styles.button,
-                    selectedDays.includes(day) && styles.selectedButton
+                    selectedDays.includes(day) && styles.selectedButton,
                   ]}
-                  onPress={() => toggleDaySelection(day)}
-                >
-                  <Text style={[styles.buttonText, selectedDays.includes(day) && styles.selectedButtonText]}>{day}</Text>
+                  onPress={() => toggleDaySelection(day)}>
+                  <Text
+                    style={[
+                      styles.buttonText,
+                      selectedDays.includes(day) && styles.selectedButtonText,
+                    ]}>
+                    {day}
+                  </Text>
                 </TouchableOpacity>
               ))}
             </View>
           </View>
           <View style={styles.section}>
             <TextInput
-              style={[styles.input, { height: 90 }]}
+              style={[styles.input, {height: 90}]}
               multiline
               placeholder={strings.note_placeholder}
               placeholderTextColor="#888888"
             />
           </View>
-          <TouchableOpacity style={styles.submitButton} onPress={handlePlanDaysPress}>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={handlePlanDaysPress}>
             <Text style={styles.submitButtonText}>{strings.next_button}</Text>
           </TouchableOpacity>
         </View>
@@ -76,7 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     color: '#000000',
-    alignSelf: 'flex-end', // Align text to the right
+    alignSelf: 'flex-end',
   },
   input: {
     borderWidth: 1,
@@ -93,7 +119,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     marginBottom: 5,
     marginTop: 20,
-    justifyContent: 'space-between', // Add this line to evenly space the buttons
+    justifyContent: 'space-between',
   },
   button: {
     backgroundColor: 'white',
@@ -102,7 +128,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 13,
     paddingHorizontal: 13,
-    width: '48%', // Adjust to fit two buttons per row
+    width: '48%',
     alignItems: 'center',
     marginBottom: 10,
     shadowColor: '#000',
@@ -112,7 +138,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 3, 
+    elevation: 3,
   },
   buttonText: {
     color: '#000000',
@@ -126,7 +152,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
   },
   submitButton: {
-    marginTop:25,
+    marginTop: 25,
     backgroundColor: '#006F34',
     padding: 12,
     borderRadius: 10,

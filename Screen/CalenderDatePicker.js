@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
+import React, {useState} from 'react';
+import {View, StyleSheet, Button, Text} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
 const CalenderDatePicker = () => {
@@ -13,7 +13,7 @@ const CalenderDatePicker = () => {
         modal
         open={open}
         date={date}
-        onConfirm={(date) => {
+        onConfirm={date => {
           setOpen(false);
           setDate(date);
         }}
@@ -24,7 +24,9 @@ const CalenderDatePicker = () => {
         theme="light"
       />
       <View style={styles.selectedDateContainer}>
-        <Text style={styles.selectedDateText}>Selected Date: {date.toLocaleDateString()}</Text>
+        <Text style={styles.selectedDateText}>
+          Selected Date: {date.toLocaleDateString()}
+        </Text>
       </View>
     </View>
   );
@@ -43,7 +45,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-
-
 
 export default CalenderDatePicker;

@@ -1,43 +1,63 @@
 import * as React from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from 'react-native';
+import {useSelector} from 'react-redux';
 
 const WhoWeAreScreen = () => {
+  const {strings} = useSelector(state => state.commonData);
 
-  const { strings } = useSelector((state) => state.commonData);
-  
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.header}>
-            {strings.about_us}
-          </Text>
-          <Image source={require('../../Image/regimelogo.png')} style={styles.image} />
+          <Text style={styles.header}>{strings.about_us}</Text>
+          <Image
+            source={require('../../Image/regimelogo.png')}
+            style={styles.image}
+          />
           <View style={styles.yellowLine} />
-          <Text style={styles.text}>
-            {strings.about_content}
-          </Text>
+          <Text style={styles.text}>{strings.about_content}</Text>
           <View style={styles.socialContainer}>
             <View style={styles.socialItem}>
               <Text style={styles.socialText}>{strings.facebook}</Text>
-              <Image source={require('../../Image/icon/facebook.png')} style={styles.socialIcon} />
+              <Image
+                source={require('../../Image/icon/facebook.png')}
+                style={styles.socialIcon}
+              />
             </View>
             <View style={styles.socialItem}>
-             <Text style={styles.socialText}>{strings.instagram}</Text>
-              <Image source={require('../../Image/icon/instagram.png')} style={styles.socialIcon} />
+              <Text style={styles.socialText}>{strings.instagram}</Text>
+              <Image
+                source={require('../../Image/icon/instagram.png')}
+                style={styles.socialIcon}
+              />
             </View>
             <View style={styles.socialItem}>
-               <Text style={styles.socialText}>{strings.twitter}</Text>
-              <Image source={require('../../Image/icon/twitter.png')} style={styles.socialIcon} />
+              <Text style={styles.socialText}>{strings.twitter}</Text>
+              <Image
+                source={require('../../Image/icon/twitter.png')}
+                style={styles.socialIcon}
+              />
             </View>
             <View style={styles.socialItem}>
-            <Text style={styles.socialText}>+966136765068</Text>
-              <Image source={require('../../Image/icon/whatsapp.png')} style={styles.socialIcon} />
+              <Text style={styles.socialText}>+966136765068</Text>
+              <Image
+                source={require('../../Image/icon/whatsapp.png')}
+                style={styles.socialIcon}
+              />
             </View>
             <View style={styles.socialItem}>
-             <Text style={styles.socialText}>{strings.google}</Text>
-              <Image source={require('../../Image/icon/google.png')} style={styles.socialIcon} />
+              <Text style={styles.socialText}>{strings.google}</Text>
+              <Image
+                source={require('../../Image/icon/google.png')}
+                style={styles.socialIcon}
+              />
             </View>
           </View>
         </View>
@@ -74,14 +94,14 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     textAlign: 'center',
-    padding:10,
+    padding: 10,
     color: '#000000',
     marginBottom: 30,
   },
   socialContainer: {
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    alignItems: 'flex-end', 
+    alignItems: 'flex-end',
     marginBottom: 20,
   },
   socialItem: {
@@ -93,7 +113,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     marginBottom: 5,
-    marginLeft:15
+    marginLeft: 15,
   },
   socialText: {
     fontSize: 14,

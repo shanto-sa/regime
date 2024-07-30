@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, {useState, createRef} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -12,7 +12,7 @@ import {
 
 import Loader from './Components/Loader';
 
-const LoginCodeScreen = ({ navigation }) => {
+const LoginCodeScreen = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [loading, setLoading] = useState(false);
@@ -32,10 +32,7 @@ const LoginCodeScreen = ({ navigation }) => {
       return;
     }
     setLoading(true);
-    // Simulating login by checking against static credentials
-    if (phoneNumber === '12345678' && verificationCode === '1234') { // Adjust verification logic
-      // Set user authentication status in global state
-      // For example, using Redux or Context API
+    if (phoneNumber === '12345678' && verificationCode === '1234') {
       navigation.navigate('ProfileSet');
     } else {
       setErrortext('Invalid phone number or verification code');
@@ -56,16 +53,14 @@ const LoginCodeScreen = ({ navigation }) => {
         <Loader loading={loading} />
         <View style={styles.cardContainer}>
           <KeyboardAvoidingView enabled>
-            <Text style={styles.headerText}>
-              تسجيل الدخول إلى حسابك
-            </Text>
+            <Text style={styles.headerText}>تسجيل الدخول إلى حسابك</Text>
             <Text style={styles.subHeaderText}>
               رجيم يمنحك الباقات الأنسب لك التي تحتاجها لبناء جسم صحي
             </Text>
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
-                onChangeText={(phoneNumber) =>
+                onChangeText={phoneNumber =>
                   setPhoneNumber(phoneNumber.replace(/[^0-9]/g, ''))
                 }
                 placeholder="رقم الهاتف"
@@ -83,7 +78,7 @@ const LoginCodeScreen = ({ navigation }) => {
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
-                onChangeText={(verificationCode) =>
+                onChangeText={verificationCode =>
                   setVerificationCode(verificationCode.replace(/[^0-9]/g, ''))
                 }
                 placeholder="كود التحقق"
@@ -98,9 +93,7 @@ const LoginCodeScreen = ({ navigation }) => {
               />
             </View>
             {errortext != '' ? (
-              <Text style={styles.errorTextStyle}>
-                {errortext}
-              </Text>
+              <Text style={styles.errorTextStyle}>{errortext}</Text>
             ) : null}
             <TouchableOpacity
               style={styles.buttonStyle}

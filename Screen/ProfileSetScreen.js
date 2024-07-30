@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, {useState, createRef} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -12,12 +12,12 @@ import {
 
 import Loader from './Components/Loader';
 
-const ProfileSetScreen = ({ navigation }) => {
+const ProfileSetScreen = ({navigation}) => {
   const [arabicName, setArabicName] = useState('');
   const [englishName, setEnglishName] = useState('');
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
-  const [step, setStep] = useState(0); // Current step, 0 represents incomplete step
+  const [step, setStep] = useState(0);
 
   const arabicNameRef = createRef();
   const englishNameRef = createRef();
@@ -29,8 +29,6 @@ const ProfileSetScreen = ({ navigation }) => {
       return;
     }
     setLoading(true);
-    // Simulating login by checking against static credentials
-    // Here you can add your logic to handle the submission
     setLoading(false);
     navigation.navigate('Goal');
   };
@@ -41,12 +39,12 @@ const ProfileSetScreen = ({ navigation }) => {
       keyboardShouldPersistTaps="handled">
       <View style={styles.overlay} />
 
-       <TouchableOpacity style={styles.topRightArrowContainer}>
-                <Image
-                  source={require('../Image/arrow2.png')}
-                  style={styles.topRightArrow}
-                />
-              </TouchableOpacity>
+      <TouchableOpacity style={styles.topRightArrowContainer}>
+        <Image
+          source={require('../Image/arrow2.png')}
+          style={styles.topRightArrow}
+        />
+      </TouchableOpacity>
       <View style={styles.mainBody}>
         <Loader loading={loading} />
 
@@ -56,13 +54,15 @@ const ProfileSetScreen = ({ navigation }) => {
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
-                onChangeText={(arabicName) => setArabicName(arabicName)}
+                onChangeText={arabicName => setArabicName(arabicName)}
                 placeholder="الاسم بالعربي"
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
                 keyboardType="default"
                 returnKeyType="next"
-                onSubmitEditing={() => englishNameRef.current && englishNameRef.current.focus()}
+                onSubmitEditing={() =>
+                  englishNameRef.current && englishNameRef.current.focus()
+                }
                 underlineColorAndroid="#f000"
                 blurOnSubmit={false}
                 ref={arabicNameRef}
@@ -71,7 +71,7 @@ const ProfileSetScreen = ({ navigation }) => {
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
-                onChangeText={(englishName) => setEnglishName(englishName)}
+                onChangeText={englishName => setEnglishName(englishName)}
                 placeholder="الاسم بالانجليزي"
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
@@ -83,22 +83,20 @@ const ProfileSetScreen = ({ navigation }) => {
                 ref={englishNameRef}
               />
             </View>
-
           </KeyboardAvoidingView>
-
         </View>
 
-
-           {errortext != '' ? (
-                        <Text style={styles.errorTextStyle}>{errortext}</Text>
-                      ) : null}
+        {errortext != '' ? (
+          <Text style={styles.errorTextStyle}>{errortext}</Text>
+        ) : null}
         <View style={styles.bottomArrowContainer}>
-          <TouchableOpacity style={styles.bottomArrow} onPress={handleSubmitPress}>
+          <TouchableOpacity
+            style={styles.bottomArrow}
+            onPress={handleSubmitPress}>
             <Image
               source={require('../Image/arrowright.png')}
               style={styles.bottomArrowImage}
             />
-
           </TouchableOpacity>
         </View>
       </View>
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: '30%',
     margin: '5%',
-    position: 'relative', // Added position relative
+    position: 'relative',
   },
   topRightArrowContainer: {
     position: 'absolute',
@@ -166,7 +164,7 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     fontSize: 14,
-    paddingTop:30
+    paddingTop: 30,
   },
   bottomArrowContainer: {
     alignItems: 'center',

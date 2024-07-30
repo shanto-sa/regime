@@ -1,15 +1,25 @@
 import * as React from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { sendContactUsMessage } from '../../slices/contactSlice';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {sendContactUsMessage} from '../../slices/contactSlice';
 
 const ContactUsScreen = () => {
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.contact);
+  const {loading, error} = useSelector(state => state.contact);
   const [title, setTitle] = React.useState('');
   const [file, setFile] = React.useState(null);
   const [message, setMessage] = React.useState('');
-  const { strings } = useSelector((state) => state.commonData);
+  const {strings} = useSelector(state => state.commonData);
 
   const handleSendMessage = () => {
     const messageData = {
@@ -21,11 +31,14 @@ const ContactUsScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#FFFFFF'}}>
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.header}>{strings.contact_header}</Text>
-          <Image source={require('../../Image/regimelogo.png')} style={styles.image} />
+          <Image
+            source={require('../../Image/regimelogo.png')}
+            style={styles.image}
+          />
           <View style={styles.yellowLine} />
           <Text style={styles.text}>
             {strings.ctext1}
@@ -41,12 +54,15 @@ const ContactUsScreen = () => {
             accessibilityLabel="Message title"
           />
           <View style={styles.fileUploadContainer}>
-            <Image source={require('../../Image/download.png')} style={styles.fileUploadIcon} />
+            <Image
+              source={require('../../Image/download.png')}
+              style={styles.fileUploadIcon}
+            />
             <TextInput
               style={styles.fileUploadInput}
               placeholder={strings.fileUploadPlaceholder}
               value={file?.name || ''}
-              onChangeText={(text) => setFile({ name: text })}
+              onChangeText={text => setFile({name: text})}
               accessibilityLabel="File upload"
             />
           </View>
@@ -64,12 +80,13 @@ const ContactUsScreen = () => {
             style={[styles.sendButton, loading && styles.disabledButton]}
             onPress={handleSendMessage}
             disabled={loading}
-            accessibilityLabel="Send message"
-          >
+            accessibilityLabel="Send message">
             {loading ? (
               <ActivityIndicator color="#FFFFFF" />
             ) : (
-              <Text style={styles.sendButtonText}>{strings.sendButtonText}</Text>
+              <Text style={styles.sendButtonText}>
+                {strings.sendButtonText}
+              </Text>
             )}
           </TouchableOpacity>
         </View>

@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+} from 'react-native';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { submitPayment  } from '../../slices/paymentSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {submitPayment} from '../../slices/paymentSlice';
 
 const PayNowScreen = () => {
-
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
   const dispatch = useDispatch();
-  const { loading, error } = useSelector(state => state.payment);
-  const { strings } = useSelector((state) => state.commonData);
+  const {loading, error} = useSelector(state => state.payment);
+  const {strings} = useSelector(state => state.commonData);
 
-  const handlePaymentMethodSelection = (method) => {
+  const handlePaymentMethodSelection = method => {
     setSelectedPaymentMethod(method);
   };
 
-
   const handleSubmit = () => {
-    // Prepare the payment data
     const paymentData = {
       packageName: 'اسم الباقة',
       calories: '1000 من 1500 سعرة حرارية',
@@ -25,17 +29,14 @@ const PayNowScreen = () => {
       days: 'السبت، احد، الاثنين، الثلاثاء، الأربعاء',
       startDate: '15/12/2023',
       price: '600',
-      paymentMethod: selectedPaymentMethod
+      paymentMethod: selectedPaymentMethod,
     };
-
-    // Dispatch the submitPayment action
     dispatch(submitPayment(paymentData));
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, padding: 16 }}>
-        {/* Card with package details */}
+    <SafeAreaView style={{flex: 1}}>
+      <View style={{flex: 1, padding: 16}}>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>{strings.package_name}</Text>
           <View style={styles.cardContent}>
@@ -43,54 +44,87 @@ const PayNowScreen = () => {
               <Text style={styles.cardText}>
                 تحصل على 1000 من 1500 سعرة حرارية
               </Text>
-              <Image source={require('../../Image/play.png')} style={styles.icon} />
+              <Image
+                source={require('../../Image/play.png')}
+                style={styles.icon}
+              />
             </View>
             <View style={styles.itemContainer}>
               <Text style={styles.cardText}>5 أيام في الأسبوع</Text>
-              <Image source={require('../../Image/play.png')} style={styles.icon} />
+              <Image
+                source={require('../../Image/play.png')}
+                style={styles.icon}
+              />
             </View>
             <View style={styles.itemContainer}>
-              <Text style={styles.cardText}>السبت، احد، الاثنين، الثلاثاء، الأربعاء</Text>
-              <Image source={require('../../Image/play.png')} style={styles.icon} />
+              <Text style={styles.cardText}>
+                السبت، احد، الاثنين، الثلاثاء، الأربعاء
+              </Text>
+              <Image
+                source={require('../../Image/play.png')}
+                style={styles.icon}
+              />
             </View>
             <View style={styles.itemContainer}>
               <Text style={styles.cardText}>تاريخ البدء: 15/12/2023</Text>
-              <Image source={require('../../Image/play.png')} style={styles.icon} />
+              <Image
+                source={require('../../Image/play.png')}
+                style={styles.icon}
+              />
             </View>
             <View style={styles.priceContainer}>
-            <Text style={styles.price}>400</Text>
-              <Text style={styles.currency}>ريال/أسبوع<Text style={styles.tax}> (15% شامل الضريبة)</Text></Text>
-              
+              <Text style={styles.price}>400</Text>
+              <Text style={styles.currency}>
+                ريال/أسبوع<Text style={styles.tax}> (15% شامل الضريبة)</Text>
+              </Text>
             </View>
           </View>
         </View>
 
-        {/* Header text for payment method */}
-        <Text style={styles.paymentHeader}>{strings.payment_method_header}</Text>
-        {/* Payment method buttons */}
+        <Text style={styles.paymentHeader}>
+          {strings.payment_method_header}
+        </Text>
         <View style={styles.paymentButtonsContainer}>
           <TouchableOpacity
-            style={[styles.paymentButton, selectedPaymentMethod === 'الدفع بالبطاقة' && styles.selectedPaymentButton]}
+            style={[
+              styles.paymentButton,
+              selectedPaymentMethod === 'الدفع بالبطاقة' &&
+                styles.selectedPaymentButton,
+            ]}
             onPress={() => handlePaymentMethodSelection('الدفع بالبطاقة')}>
-            <View style={[styles.checkbox, selectedPaymentMethod === 'الدفع بالبطاقة' && styles.selectedCheckbox]}></View>
-            <Text style={styles.paymentButtonText}>{strings.pay_with_card}</Text>
+            <View
+              style={[
+                styles.checkbox,
+                selectedPaymentMethod === 'الدفع بالبطاقة' &&
+                  styles.selectedCheckbox,
+              ]}></View>
+            <Text style={styles.paymentButtonText}>
+              {strings.pay_with_card}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.paymentButton, selectedPaymentMethod === 'Apple Pay' && styles.selectedPaymentButton]}
+            style={[
+              styles.paymentButton,
+              selectedPaymentMethod === 'Apple Pay' &&
+                styles.selectedPaymentButton,
+            ]}
             onPress={() => handlePaymentMethodSelection('Apple Pay')}>
-            <View style={[styles.checkbox, selectedPaymentMethod === 'Apple Pay' && styles.selectedCheckbox]}></View>
+            <View
+              style={[
+                styles.checkbox,
+                selectedPaymentMethod === 'Apple Pay' &&
+                  styles.selectedCheckbox,
+              ]}></View>
             <Text style={styles.paymentButtonText}>{strings.apple_pay}</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Submit button */}
-        <TouchableOpacity 
-        style={[styles.submitButton, loading && styles.disabledButton]} 
-        onPress={handleSubmit}
-        disabled={loading}
-      >
-
-          <Text style={styles.submitButtonText}>{strings.complete_order_button}</Text>
+        <TouchableOpacity
+          style={[styles.submitButton, loading && styles.disabledButton]}
+          onPress={handleSubmit}
+          disabled={loading}>
+          <Text style={styles.submitButtonText}>
+            {strings.complete_order_button}
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -122,7 +156,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between', // Align image and text to right
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   icon: {
@@ -151,7 +185,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
     marginBottom: 10,
-    marginRight:10
+    marginRight: 10,
   },
   paymentButtonsContainer: {
     flexDirection: 'column',
@@ -174,7 +208,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 3, 
+    elevation: 3,
   },
   selectedPaymentButton: {
     backgroundColor: '#FFFFFF',

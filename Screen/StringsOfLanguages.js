@@ -1,4 +1,3 @@
-// StringsOfLanguages.js
 import languageStrings from './languageStrings';
 
 const StringsOfLanguages = {

@@ -6,9 +6,7 @@ const PrivacyPolicyScreen = () => {
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, padding: 16}}>
         <View style={styles.container}>
-          <Text style={styles.header}>
-          Privacy Policy
-          </Text>
+          <Text style={styles.header}>Privacy Policy</Text>
         </View>
       </View>
     </SafeAreaView>

@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, SafeAreaView, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
-import { selectUserData } from '../../slices/authSlice';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchHomeData } from '../../slices/fetchDataSlice';
+import {selectUserData} from '../../slices/authSlice';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {fetchHomeData} from '../../slices/fetchDataSlice';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -18,13 +27,12 @@ const HomeScreen = () => {
 
   const dispatch = useDispatch();
 
-  const { HomeData, loading, error } = useSelector(state => state.home);
-  const {strings } = useSelector((state) => state.commonData);
+  const {HomeData, error} = useSelector(state => state.home);
+  const {strings} = useSelector(state => state.commonData);
 
   useEffect(() => {
     dispatch(fetchHomeData());
   }, [dispatch]);
-
 
   if (error) {
     return (
@@ -33,110 +41,113 @@ const HomeScreen = () => {
       </SafeAreaView>
     );
   }
-  
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* Main Card */}
-
       <Text>Welcome, {userData?.name || 'User'}!</Text>
-
       <ScrollView>
-      <View style={styles.card}>
-      {HomeData.map(home => (
-        <View key={home.id}>
-        <Text style={styles.infoText}>
-          {strings.htext1}
-          <Text style={styles.packageText}>  {home.subscription.package || 'باقة غير معروفة'}</Text>
-          {strings.htext2} {home.subscription.startDate || '0'} {strings.htext3}
-          <Text style={styles.dateText}> {home.subscription.endDate || '0'} </Text>
-        </Text>
-        </View>
-           ))}
-        <Image
-          source={require('../../Image/arrow.png')}
-          style={styles.arrowIcon}
-          resizeMode="contain"
-        />
-      </View>
-      {/* Card 1 */}
-      {HomeData.map(home => (
-      <View key={home.id} style={styles.row}>
-        <View style={styles.subCard}>
-          <Text style={styles.boldText}>{home.stats.meals || '0'}</Text>
-          <Text>{strings.number_of_meals}</Text>
-          <Image
-            source={require('../../Image/icon/food.png')}
-            style={styles.icon}
-            resizeMode="contain"
-          />
-        </View>
-        {/* Card 2 */}
-        <View style={styles.subCard}>
-          <Text style={styles.boldText}>{home.stats.rows || '0'}</Text>
-          <Text>{strings.number_of_meals}</Text>
-          <Image
-            source={require('../../Image/icon/row.png')}
-            style={styles.icon}
-            resizeMode="contain"
-          />
-        </View>
-      </View>
-        ))}
-      {/* Two Cards in Second Row */}
-      {HomeData.map(home => (
-      <View key={home.id} style={styles.row}>
-        <View style={styles.subCard}>
-          <Text style={styles.boldText}>{home.stats2.meals || '0'}</Text>
-          <Text>{strings.number_of_meals}</Text>
-          <Image
-            source={require('../../Image/icon/food2.png')}
-            style={styles.icon}
-            resizeMode="contain"
-          />
-        </View>
-        <View style={styles.subCard}>
-          <Text style={styles.boldText}>{home.stats2.rows || '0'}</Text>
-          <Text>{strings.number_of_meals}</Text>
-          <Image
-            source={require('../../Image/icon/calender.png')}
-            style={styles.icon}
-            resizeMode="contain"
-          />
-        </View>
-      </View>
-       ))}
-      <View style={styles.dottedLine} />
-
-      <View style={styles.rightContent}>
-  <View style={styles.contentWrapper}>
-    <Text style={styles.todayText}>{strings.todays_meal}</Text>
-    <Image
-      source={require('../../Image/icon/cardicon.png')}
-      resizeMode="contain"
-    />
-  </View>
-</View>
-
-{/* <ScrollView contentContainerStyle={styles.scrollViewContent}> */}
-            {/* Additional Card */}
-            <View style={styles.card2}>
-              <View style={styles.centerContent}>
-                <Image
-                  source={require('../../Image/nomeal2.png')}
-                  style={styles.card2Image}
-                  resizeMode="cover"
-                />
-              </View>
-              <View style={styles.centerContent}>
-                <Text style={styles.noMealText}>{strings.no_meals}</Text>
-                <Text style={styles.noMealInfoText}>{strings.meal_message}</Text>
-                <TouchableOpacity style={styles.addButton} onPress={handlePlanDaysPress}>
-                  <Text style={styles.addButtonText}>{strings.subscribe_plan}</Text>
-                </TouchableOpacity>
-              </View>
+        <View style={styles.card}>
+          {HomeData.map(home => (
+            <View key={home.id}>
+              <Text style={styles.infoText}>
+                {strings.htext1}
+                <Text style={styles.packageText}>
+                  {' '}
+                  {home.subscription.package || 'باقة غير معروفة'}
+                </Text>
+                {strings.htext2} {home.subscription.startDate || '0'}{' '}
+                {strings.htext3}
+                <Text style={styles.dateText}>
+                  {' '}
+                  {home.subscription.endDate || '0'}{' '}
+                </Text>
+              </Text>
             </View>
-          {/* </ScrollView> */}
-          </ScrollView>
+          ))}
+          <Image
+            source={require('../../Image/arrow.png')}
+            style={styles.arrowIcon}
+            resizeMode="contain"
+          />
+        </View>
+        {/* Card 1 */}
+        {HomeData.map(home => (
+          <View key={home.id} style={styles.row}>
+            <View style={styles.subCard}>
+              <Text style={styles.boldText}>{home.stats.meals || '0'}</Text>
+              <Text>{strings.number_of_meals}</Text>
+              <Image
+                source={require('../../Image/icon/food.png')}
+                style={styles.icon}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.subCard}>
+              <Text style={styles.boldText}>{home.stats.rows || '0'}</Text>
+              <Text>{strings.number_of_meals}</Text>
+              <Image
+                source={require('../../Image/icon/row.png')}
+                style={styles.icon}
+                resizeMode="contain"
+              />
+            </View>
+          </View>
+        ))}
+        {HomeData.map(home => (
+          <View key={home.id} style={styles.row}>
+            <View style={styles.subCard}>
+              <Text style={styles.boldText}>{home.stats2.meals || '0'}</Text>
+              <Text>{strings.number_of_meals}</Text>
+              <Image
+                source={require('../../Image/icon/food2.png')}
+                style={styles.icon}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.subCard}>
+              <Text style={styles.boldText}>{home.stats2.rows || '0'}</Text>
+              <Text>{strings.number_of_meals}</Text>
+              <Image
+                source={require('../../Image/icon/calender.png')}
+                style={styles.icon}
+                resizeMode="contain"
+              />
+            </View>
+          </View>
+        ))}
+        <View style={styles.dottedLine} />
+
+        <View style={styles.rightContent}>
+          <View style={styles.contentWrapper}>
+            <Text style={styles.todayText}>{strings.todays_meal}</Text>
+            <Image
+              source={require('../../Image/icon/cardicon.png')}
+              resizeMode="contain"
+            />
+          </View>
+        </View>
+
+        {/* <ScrollView contentContainerStyle={styles.scrollViewContent}> */}
+        <View style={styles.card2}>
+          <View style={styles.centerContent}>
+            <Image
+              source={require('../../Image/nomeal2.png')}
+              style={styles.card2Image}
+              resizeMode="cover"
+            />
+          </View>
+          <View style={styles.centerContent}>
+            <Text style={styles.noMealText}>{strings.no_meals}</Text>
+            <Text style={styles.noMealInfoText}>{strings.meal_message}</Text>
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={handlePlanDaysPress}>
+              <Text style={styles.addButtonText}>{strings.subscribe_plan}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        {/* </ScrollView> */}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -146,26 +157,26 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-   card: {
-      backgroundColor: '#EFF9F0',
-      borderRadius: 10,
-      padding: 30,
-      margin: screenWidth * 0.04,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
-    card2: {
-      borderColor: '#F2F2F2',
-      borderWidth: 1,
-      borderRadius: 6,
-      padding: screenWidth * 0.02,
-      margin: screenWidth * 0.02,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
-    
+  card: {
+    backgroundColor: '#EFF9F0',
+    borderRadius: 10,
+    padding: 30,
+    margin: screenWidth * 0.04,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  card2: {
+    borderColor: '#F2F2F2',
+    borderWidth: 1,
+    borderRadius: 6,
+    padding: screenWidth * 0.02,
+    margin: screenWidth * 0.02,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
   packageText: {
     color: 'blue',
     fontWeight: 'bold',
@@ -200,7 +211,7 @@ const styles = StyleSheet.create({
   boldText: {
     fontSize: screenWidth * 0.06,
     fontWeight: 'bold',
-    color:'#000000'
+    color: '#000000',
   },
   icon: {
     position: 'absolute',
@@ -216,11 +227,11 @@ const styles = StyleSheet.create({
     fontSize: screenWidth * 0.05,
     fontWeight: 'bold',
     marginBottom: screenHeight * 0.01,
-    color:'#000000'
+    color: '#000000',
   },
   additionalSubText: {
     fontSize: screenWidth * 0.04,
-    color:'#000000'
+    color: '#000000',
   },
   cardImage: {
     width: '30%',
@@ -229,18 +240,18 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#F67600',
     borderRadius: 5,
-    paddingVertical: screenHeight * 0.01, // Adjust padding vertically
-    paddingHorizontal: screenWidth * 0.03, // Adjust padding horizontally
+    paddingVertical: screenHeight * 0.01,
+    paddingHorizontal: screenWidth * 0.03,
     marginTop: screenHeight * 0.02,
   },
   buttonText: {
     color: '#FFF',
     fontWeight: 'bold',
-    fontSize: screenWidth * 0.03, // Decrease font size
+    fontSize: screenWidth * 0.03,
   },
   dottedLine: {
     borderTopWidth: 4,
-    borderTopColor: '#F6F6F6', // Change color as needed
+    borderTopColor: '#F6F6F6',
     borderStyle: 'dotted',
     marginHorizontal: screenWidth * 0.05,
     margin: screenWidth * 0.05,
@@ -249,7 +260,7 @@ const styles = StyleSheet.create({
   contentWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight:24,
+    marginRight: 24,
   },
   rightContent: {
     flex: 1,
@@ -259,12 +270,11 @@ const styles = StyleSheet.create({
     fontSize: screenWidth * 0.04,
     fontWeight: 'bold',
     color: '#000000',
-    marginRight: 10, // Adjust spacing as needed
+    marginRight: 10,
   },
   scrollViewContainer: {
-    paddingBottom: screenHeight * 0.1, // Adjust as needed
+    paddingBottom: screenHeight * 0.1,
   },
-
 
   card2: {
     borderColor: '#F2F2F2',
@@ -272,23 +282,23 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: screenWidth * 0.02,
     margin: screenWidth * 0.05,
-    alignItems: 'center', // Center items horizontally
+    alignItems: 'center',
   },
   centerContent: {
     alignItems: 'center',
-    marginBottom: screenHeight * 0.02, // Add margin between image and text
+    marginBottom: screenHeight * 0.02,
   },
   noMealText: {
     fontSize: screenWidth * 0.04,
     fontWeight: 'bold',
     marginBottom: screenHeight * 0.01,
-    color: '#000000'
+    color: '#000000',
   },
   noMealInfoText: {
     fontSize: screenWidth * 0.04,
     marginBottom: screenHeight * 0.01,
     color: '#000000',
-    textAlign: 'center', // Center text horizontally
+    textAlign: 'center',
   },
   addButton: {
     backgroundColor: '#2CA545',
@@ -312,7 +322,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  
 });
 
 export default HomeScreen;

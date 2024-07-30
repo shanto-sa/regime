@@ -1,22 +1,32 @@
 import * as React from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image, ScrollView } from 'react-native';
-import {  useSelector } from 'react-redux';
-
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  ScrollView,
+} from 'react-native';
+import {useSelector} from 'react-redux';
 
 const TermsAndConditionScreen = () => {
-
-  const { strings } = useSelector((state) => state.commonData);
+  const {strings} = useSelector(state => state.commonData);
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-           <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.header}>
-          {strings.terms_and_conditions_title}
-        </Text>
-        <Image source={require('../../Image/regimelogo.png')} style={styles.image} />
-        <View style={styles.yellowLine} />
-       <Text style={styles.text}>{strings.terms_and_conditions_content}</Text>
-      </View>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.header}>
+            {strings.terms_and_conditions_title}
+          </Text>
+          <Image
+            source={require('../../Image/regimelogo.png')}
+            style={styles.image}
+          />
+          <View style={styles.yellowLine} />
+          <Text style={styles.text}>
+            {strings.terms_and_conditions_content}
+          </Text>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
