@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, StyleSheet, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 const PlanDaysScreen = () => {
   const navigation = useNavigation();
   const [selectedDays, setSelectedDays] = useState([]);
+  const { strings } = useSelector((state) => state.commonData);
 
   const handlePlanDaysPress = () => {
     navigation.navigate('PayNow');
@@ -25,7 +27,7 @@ const PlanDaysScreen = () => {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={{ flex: 1, paddingHorizontal: 16 , backgroundColor:'#FFFFFF'}}>
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>يوم البدء</Text>
+            <Text style={styles.sectionTitle}>{strings.start_day_title}</Text>
             <TextInput
               style={styles.input}
               placeholder="1/12/2023"
@@ -33,9 +35,9 @@ const PlanDaysScreen = () => {
             />
           </View>
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>الايام المختارة للاشتراك</Text>
+          <Text style={styles.sectionTitle}>{strings.selected_days_title}</Text>
             <View style={styles.buttonsContainer}>
-              {['الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد'].map(day => (
+              {[strings.friday, strings.saturday, strings.sunday, strings.monday, strings.tuesday, strings.wednesday, strings.thursday].map(day => (
                 <TouchableOpacity
                   key={day}
                   style={[
@@ -53,12 +55,12 @@ const PlanDaysScreen = () => {
             <TextInput
               style={[styles.input, { height: 90 }]}
               multiline
-              placeholder="ملاحظة"
+              placeholder={strings.note_placeholder}
               placeholderTextColor="#888888"
             />
           </View>
           <TouchableOpacity style={styles.submitButton} onPress={handlePlanDaysPress}>
-            <Text style={styles.submitButtonText}>التالي</Text>
+            <Text style={styles.submitButtonText}>{strings.next_button}</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

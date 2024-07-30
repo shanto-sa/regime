@@ -9,10 +9,12 @@ const PayNowScreen = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
   const dispatch = useDispatch();
   const { loading, error } = useSelector(state => state.payment);
+  const { strings } = useSelector((state) => state.commonData);
 
   const handlePaymentMethodSelection = (method) => {
     setSelectedPaymentMethod(method);
   };
+
 
   const handleSubmit = () => {
     // Prepare the payment data
@@ -22,7 +24,7 @@ const PayNowScreen = () => {
       daysPerWeek: '5 أيام في الأسبوع',
       days: 'السبت، احد، الاثنين، الثلاثاء، الأربعاء',
       startDate: '15/12/2023',
-      price: '400',
+      price: '600',
       paymentMethod: selectedPaymentMethod
     };
 
@@ -30,14 +32,12 @@ const PayNowScreen = () => {
     dispatch(submitPayment(paymentData));
   };
 
-
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 16 }}>
         {/* Card with package details */}
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>اسم الباقة</Text>
+          <Text style={styles.cardTitle}>{strings.package_name}</Text>
           <View style={styles.cardContent}>
             <View style={styles.itemContainer}>
               <Text style={styles.cardText}>
@@ -66,21 +66,20 @@ const PayNowScreen = () => {
         </View>
 
         {/* Header text for payment method */}
-        <Text style={styles.paymentHeader}>طريقة الدفع</Text>
-
+        <Text style={styles.paymentHeader}>{strings.payment_method_header}</Text>
         {/* Payment method buttons */}
         <View style={styles.paymentButtonsContainer}>
           <TouchableOpacity
             style={[styles.paymentButton, selectedPaymentMethod === 'الدفع بالبطاقة' && styles.selectedPaymentButton]}
             onPress={() => handlePaymentMethodSelection('الدفع بالبطاقة')}>
             <View style={[styles.checkbox, selectedPaymentMethod === 'الدفع بالبطاقة' && styles.selectedCheckbox]}></View>
-            <Text style={styles.paymentButtonText}>الدفع بالبطاقة</Text>
+            <Text style={styles.paymentButtonText}>{strings.pay_with_card}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.paymentButton, selectedPaymentMethod === 'Apple Pay' && styles.selectedPaymentButton]}
             onPress={() => handlePaymentMethodSelection('Apple Pay')}>
             <View style={[styles.checkbox, selectedPaymentMethod === 'Apple Pay' && styles.selectedCheckbox]}></View>
-            <Text style={styles.paymentButtonText}>Apple Pay</Text>
+            <Text style={styles.paymentButtonText}>{strings.apple_pay}</Text>
           </TouchableOpacity>
         </View>
 
@@ -91,7 +90,7 @@ const PayNowScreen = () => {
         disabled={loading}
       >
 
-          <Text style={styles.submitButtonText}>إتمام الطلب</Text>
+          <Text style={styles.submitButtonText}>{strings.complete_order_button}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -148,7 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   paymentHeader: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
     marginBottom: 10,
