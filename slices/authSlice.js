@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import AsyncStorage from 'react-native-encrypted-storage';
 
 // Simulated API responses
 const simulateApiCall = (data, delay = 1000) => {
@@ -59,6 +60,11 @@ const authSlice = createSlice({
     logout: (state) => {
         state.userData = null;
       state.isAuthenticated = false;
+      AsyncStorage.removeItem('userData');
+    },
+    setUserData: (state, action) => {
+      state.userData = action.payload;
+      state.isAuthenticated = true;
     },
   },
   extraReducers: (builder) => {
@@ -84,16 +90,17 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
         state.userData  = action.payload;
         console.log('action.payload:', action.payload);
+        AsyncStorage.setItem('userData', JSON.stringify(action.payload)); 
       })
       .addCase(verifyOTP.rejected, (state, action) => {
-        state.loading = false;cle
+        state.loading = false;
         state.error = action.payload.error;
       });
   },
 });
 
 
-export const { logout } = authSlice.actions;
+export const { logout, setUserData  } = authSlice.actions;
 
 // Selector to get user information
 export const selectUserData = (state) => state.auth.userData;
